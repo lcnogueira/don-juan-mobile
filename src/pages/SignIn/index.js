@@ -8,6 +8,7 @@ import {
 import {
   Label, Input, Button, ButtonText,
 } from '~/styles/components';
+
 import logo from '~/assets/images/logo3x.png';
 import background from '~/assets/images/background.png';
 
@@ -27,39 +28,41 @@ function SignIn({ signInRequest }) {
 
   return (
     <ContainerAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null}>
-      <InnerContainer>
-        <Logo source={logo} />
-        <Input
-          placeholder="Your email"
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
-          autoCapitalize="none"
-          autoCorrect={false}
-          autoFocus
-          returnKeyType="next"
-          onSubmitEditing={() => passwordInput.focus()}
-          underlineColorAndroid="transparent"
-        />
-        <Input
-          placeholder="Secret password"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-          autoCapitalize="none"
-          autoCorrect={false}
-          returnKeyType="send"
-          ref={(el) => { passwordInput = el; }}
-          onSubmitEditing={handleSubmit}
-          underlineColorAndroid="transparent"
-        />
-        <Button onPress={handleSubmit}>
-          <ButtonText>Sign In</ButtonText>
-        </Button>
-        <Label>
-          Create free account
-        </Label>
-      </InnerContainer>
+      <BackgroundWrapper source={background}>
+        <InnerContainer>
+          <Logo source={logo} />
+          <Input
+            placeholder="Your email"
+            value={email}
+            onChangeText={setEmail}
+            keyboardType="email-address"
+            autoCapitalize="none"
+            autoCorrect={false}
+            autoFocus
+            returnKeyType="next"
+            onSubmitEditing={() => passwordInput.focus()}
+            underlineColorAndroid="transparent"
+          />
+          <Input
+            placeholder="Secret password"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+            autoCapitalize="none"
+            autoCorrect={false}
+            returnKeyType="send"
+            ref={(el) => { passwordInput = el; }}
+            onSubmitEditing={handleSubmit}
+            underlineColorAndroid="transparent"
+          />
+          <Button onPress={handleSubmit}>
+            <ButtonText>Sign In</ButtonText>
+          </Button>
+          <Label>
+            Create free account
+          </Label>
+        </InnerContainer>
+      </BackgroundWrapper>
     </ContainerAvoidingView>
   );
 }
