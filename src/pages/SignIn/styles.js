@@ -1,6 +1,10 @@
 import styled from 'styled-components/native';
 
-import { colors } from '~/styles';
+import { colors, metrics } from '~/styles';
+
+export const BackgroundWrapper = styled.ImageBackground`
+  flex: 1;
+`;
 
 export const ContainerAvoidingView = styled.KeyboardAvoidingView`
   flex: 1;
@@ -10,9 +14,14 @@ export const ContainerAvoidingView = styled.KeyboardAvoidingView`
   padding: 30px;
 `;
 
-export const Title = styled.Text`
-  font-size: 28px;
-  margin-bottom: 20px;
-  color: ${colors.white};
-  text-align: center;
+export const InnerContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+`;
+
+export const Logo = styled.Image`
+  width: 72px;
+  height: 72px;
+  margin-bottom: ${metrics.tripleMargin};
+  align-self: center;
 `;

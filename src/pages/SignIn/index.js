@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { Platform, View } from 'react-native';
-import { ContainerAvoidingView, Title } from './styles';
+import { Platform } from 'react-native';
+import {
+  BackgroundWrapper, ContainerAvoidingView, InnerContainer, Logo,
+} from './styles';
 import {
   Label, Input, Button, ButtonText,
 } from '~/styles/components';
+import logo from '~/assets/images/logo3x.png';
+import background from '~/assets/images/background.png';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -23,37 +27,39 @@ function SignIn({ signInRequest }) {
 
   return (
     <ContainerAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null}>
-      <View>
-        <Title>SignIn</Title>
-        <Label>E-MAIL</Label>
+      <InnerContainer>
+        <Logo source={logo} />
         <Input
+          placeholder="Your email"
           value={email}
           onChangeText={setEmail}
           keyboardType="email-address"
           autoCapitalize="none"
           autoCorrect={false}
-          underlineColorAndroid="transparent"
           autoFocus
           returnKeyType="next"
           onSubmitEditing={() => passwordInput.focus()}
+          underlineColorAndroid="transparent"
         />
-        <Label>PASSWORD</Label>
         <Input
+          placeholder="Secret password"
           value={password}
           onChangeText={setPassword}
           secureTextEntry
           autoCapitalize="none"
           autoCorrect={false}
-          underlineColorAndroid="transparent"
           returnKeyType="send"
           ref={(el) => { passwordInput = el; }}
           onSubmitEditing={handleSubmit}
+          underlineColorAndroid="transparent"
         />
         <Button onPress={handleSubmit}>
-          <ButtonText>SignIn</ButtonText>
+          <ButtonText>Sign In</ButtonText>
         </Button>
-      </View>
-
+        <Label>
+          Create free account
+        </Label>
+      </InnerContainer>
     </ContainerAvoidingView>
   );
 }
