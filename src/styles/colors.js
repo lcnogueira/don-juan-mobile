@@ -10,6 +10,6 @@ export default {
 
   inputBackground: 'rgba(0, 0, 0, 0.1)',
 
-  darkTransparent: 'rgba(0, 0, 0, 0.2)',
-  darkerTransparent: 'rgba(0, 0, 0, 0.7)',
+  darkTransparent: 'rgba(0, 0, 0, 0.4)',
+  darkerTransparent: 'rgba(0, 0, 0, 0.9)',
 };
