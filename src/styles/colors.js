@@ -2,7 +2,7 @@ export default {
   background: '#353940',
   backgroundDarker: '#202225',
 
-  primary: '#7289DA',
+  primary: '#FF3E80',
 
   white: '#FFF',
   lighter: '#B9BBBE',
@@ -10,6 +10,6 @@ export default {
 
   inputBackground: 'rgba(0, 0, 0, 0.1)',
 
-  darkTransparent: 'rgba(0, 0, 0, 0.2)',
-  darkerTransparent: 'rgba(0, 0, 0, 0.7)',
+  darkTransparent: 'rgba(0, 0, 0, 0.4)',
+  darkerTransparent: 'rgba(0, 0, 0, 0.9)',
 };
