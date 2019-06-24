@@ -6,7 +6,7 @@ import {
   BackgroundWrapper, ContainerAvoidingView, Gradient, InnerContainer, Logo,
 } from '../styles';
 import {
-  Label, Input, Button, ButtonText,
+  LinkButton, Input, Button, ButtonText,
 } from '~/styles/components';
 
 import logo from '~/assets/images/logo3x.png';
@@ -15,6 +15,8 @@ import background from '~/assets/images/background.png';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AuthActions from '~/store/ducks/auth';
+
+import NavigationService from '~/services/navigation';
 
 function SignUp({ signUpRequest }) {
   const [email, setEmail] = useState('');
@@ -40,7 +42,6 @@ function SignUp({ signUpRequest }) {
               onChangeText={setName}
               autoCapitalize="words"
               autoCorrect={false}
-              autoFocus
               returnKeyType="next"
               onSubmitEditing={() => emailInput.focus()}
               underlineColorAndroid="transparent"
@@ -72,9 +73,9 @@ function SignUp({ signUpRequest }) {
             <Button onPress={handleSubmit}>
               <ButtonText>Create account</ButtonText>
             </Button>
-            <Label>
-              Already have an account
-            </Label>
+            <LinkButton onPress={() => NavigationService.navigate('SignIn')}>
+              <ButtonText>Already have an account</ButtonText>
+            </LinkButton>
           </InnerContainer>
         </Gradient>
       </BackgroundWrapper>

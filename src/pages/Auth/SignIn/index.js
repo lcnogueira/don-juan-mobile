@@ -6,7 +6,7 @@ import {
   BackgroundWrapper, ContainerAvoidingView, Gradient, InnerContainer, Logo,
 } from '../styles';
 import {
-  Label, Input, Button, ButtonText,
+  LinkButton, Input, Button, ButtonText,
 } from '~/styles/components';
 
 import logo from '~/assets/images/logo3x.png';
@@ -16,6 +16,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AuthActions from '~/store/ducks/auth';
 
+import NavigationService from '~/services/navigation';
 
 function SignIn({ signInRequest }) {
   const [email, setEmail] = useState('');
@@ -39,7 +40,6 @@ function SignIn({ signInRequest }) {
               keyboardType="email-address"
               autoCapitalize="none"
               autoCorrect={false}
-              autoFocus
               returnKeyType="next"
               onSubmitEditing={() => passwordInput.focus()}
               underlineColorAndroid="transparent"
@@ -59,9 +59,9 @@ function SignIn({ signInRequest }) {
             <Button onPress={handleSubmit}>
               <ButtonText>Sign In</ButtonText>
             </Button>
-            <Label>
-              Create free account
-            </Label>
+            <LinkButton onPress={() => NavigationService.navigate('SignUp')}>
+              <ButtonText>Create free account</ButtonText>
+            </LinkButton>
           </InnerContainer>
         </Gradient>
       </BackgroundWrapper>

@@ -2,14 +2,6 @@ import styled from 'styled-components/native';
 
 import { colors, metrics } from '~/styles';
 
-export const Label = styled.Text`
-  font-size: 15px;
-  color: ${colors.white};
-  font-weight: bold;
-  margin-top: ${metrics.doubleMargin}px;
-  align-self: center;
-`;
-
 export const Input = styled.TextInput.attrs({
   placeholderTextColor: colors.light,
 })`
@@ -28,6 +20,14 @@ export const Button = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   height: 44px;
+`;
+
+export const LinkButton = styled.TouchableOpacity`
+  font-size: 15px;
+  color: ${colors.white};
+  font-weight: bold;
+  margin-top: ${metrics.doubleMargin}px;
+  align-self: center;
 `;
 
 export const ButtonText = styled.Text`
