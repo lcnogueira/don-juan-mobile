@@ -20,7 +20,6 @@ export function* init() {
 export function* signIn({ email, password }) {
   try {
     const response = yield call(api.post, 'sessions', { email, password });
-
     yield call([AsyncStorage, 'setItem'], '@Omni:token', response.data.token);
 
     yield put(AuthActions.signInSuccess(response.data.token));

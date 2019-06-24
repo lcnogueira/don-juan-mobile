@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Platform } from 'react-native';
 import {
   BackgroundWrapper, ContainerAvoidingView, Gradient, InnerContainer, Logo,
-} from './styles';
+} from '../styles';
 import {
   Label, Input, Button, ButtonText,
 } from '~/styles/components';
@@ -16,14 +16,16 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AuthActions from '~/store/ducks/auth';
 
-
-function SignIn({ signInRequest }) {
+function SignUp({ signUpRequest }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+
   let passwordInput;
+  let emailInput;
 
   function handleSubmit() {
-    signInRequest(email, password);
+    signUpRequest(name, email, password);
   }
 
   return (
@@ -33,14 +35,25 @@ function SignIn({ signInRequest }) {
           <InnerContainer>
             <Logo source={logo} />
             <Input
+              placeholder="Complete name"
+              value={name}
+              onChangeText={setName}
+              autoCapitalize="words"
+              autoCorrect={false}
+              autoFocus
+              returnKeyType="next"
+              onSubmitEditing={() => emailInput.focus()}
+              underlineColorAndroid="transparent"
+            />
+            <Input
               placeholder="Your email"
               value={email}
               onChangeText={setEmail}
               keyboardType="email-address"
               autoCapitalize="none"
               autoCorrect={false}
-              autoFocus
               returnKeyType="next"
+              ref={(el) => { emailInput = el; }}
               onSubmitEditing={() => passwordInput.focus()}
               underlineColorAndroid="transparent"
             />
@@ -57,10 +70,10 @@ function SignIn({ signInRequest }) {
               underlineColorAndroid="transparent"
             />
             <Button onPress={handleSubmit}>
-              <ButtonText>Sign In</ButtonText>
+              <ButtonText>Create account</ButtonText>
             </Button>
             <Label>
-              Create free account
+              Already have an account
             </Label>
           </InnerContainer>
         </Gradient>
@@ -69,10 +82,10 @@ function SignIn({ signInRequest }) {
   );
 }
 
-SignIn.propTypes = {
-  signInRequest: PropTypes.func.isRequired,
+SignUp.propTypes = {
+  signUpRequest: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators(AuthActions, dispatch);
 
-export default connect(null, mapDispatchToProps)(SignIn);
+export default connect(null, mapDispatchToProps)(SignUp);
