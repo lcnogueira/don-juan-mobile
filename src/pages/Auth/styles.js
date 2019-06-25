@@ -8,7 +8,7 @@ export const ContainerAvoidingView = styled.KeyboardAvoidingView`
 `;
 
 export const BackgroundWrapper = styled.ImageBackground.attrs({
-  resideMode: 'cover',
+  resizeMode: 'cover',
 })`
   flex: 1;
 `;

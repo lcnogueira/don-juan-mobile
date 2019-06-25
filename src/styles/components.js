@@ -44,3 +44,8 @@ export const CancelButton = styled.TouchableOpacity`
 export const CancelText = styled.Text`
   color: ${colors.light};
 `;
+
+export const PageTitle = styled.Text`
+  font-size: 18px;
+  color: ${colors.white}
+`;
