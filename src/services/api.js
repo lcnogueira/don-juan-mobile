@@ -2,7 +2,7 @@ import axios from 'axios';
 import store from '~/store';
 
 const api = axios.create({
-  baseURL: 'http://201bcd9b.ngrok.io',
+  baseURL: 'http://feb40731.ngrok.io',
 });
 
 api.interceptors.request.use((config) => {
@@ -13,6 +13,8 @@ api.interceptors.request.use((config) => {
   if (token) {
     headers.Authorization = `Bearer ${token}`;
   }
+
+  headers.DEVICE = 'mobile';
 
   return { ...config, headers };
 });
