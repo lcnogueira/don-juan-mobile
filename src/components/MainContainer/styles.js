@@ -1,11 +1,10 @@
 import styled from 'styled-components/native';
 
-import { metrics } from '~/styles';
+import { colors, metrics } from '~/styles';
 
 export const Container = styled.View`
   flex: 1;
-  align-items: center;
-  padding-top: ${metrics.doublePadding};
+  padding: ${metrics.basePadding}px;
 `;
 
 export const Background = styled.Image`

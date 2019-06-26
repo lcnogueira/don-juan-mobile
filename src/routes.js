@@ -1,9 +1,6 @@
 import { createAppContainer, createSwitchNavigator, createStackNavigator } from 'react-navigation';
 
-import { colors } from './styles';
-
-
-import Main from '~/pages/Main';
+import Products from '~/pages/Products';
 import SignIn from '~/pages/Auth/SignIn';
 import SignUp from '~/pages/Auth/SignUp';
 
@@ -13,7 +10,7 @@ export default function createNavigator(isLoggedIn = false) {
       SignIn,
       SignUp,
       Main: createStackNavigator({
-        Main,
+        Products,
       }, {
         defaultNavigationOptions: {
           header: null,
