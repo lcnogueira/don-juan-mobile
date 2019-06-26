@@ -12,13 +12,13 @@ class Orders extends Component {
   state = {
     orders: [
       {
-        id: 1, number: 1, data: 'Há 2 meses', price: '78.00',
+        id: 3, number: 3, data: 'Ontem às 17h', price: '42.00',
       },
       {
         id: 2, number: 2, data: 'Há 1 semana', price: '142.00',
       },
       {
-        id: 3, number: 3, data: 'Ontem às 17h', price: '42.00',
+        id: 1, number: 1, data: 'Há 2 meses', price: '78.00',
       },
     ],
   }
@@ -46,7 +46,7 @@ class Orders extends Component {
             <OrderItem key={order.id}>
               <OrderName>{`Order #${order.number}`}</OrderName>
               <OrderTime>{order.data}</OrderTime>
-              <OrderPrice>{`R$ ${order.price}`}</OrderPrice>
+              <OrderPrice>{`$${order.price}`}</OrderPrice>
             </OrderItem>
           )}
         />

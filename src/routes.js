@@ -4,6 +4,7 @@ import SignIn from '~/pages/Auth/SignIn';
 import SignUp from '~/pages/Auth/SignUp';
 import Products from '~/pages/Products';
 import Orders from '~/pages/Orders';
+import Cart from '~/pages/Cart';
 
 export default function createNavigator(isLoggedIn = false) {
   return createAppContainer(
@@ -13,6 +14,7 @@ export default function createNavigator(isLoggedIn = false) {
       Main: createStackNavigator({
         Products,
         Orders,
+        Cart,
       }, {
         defaultNavigationOptions: {
           header: null,

@@ -52,7 +52,7 @@ class Products extends Component {
             <HistoryIcon />
           </LeftButton>
           <Title>Don Juan Pizzaria</Title>
-          <RightButton onPress={() => { }}>
+          <RightButton onPress={() => NavigationService.navigate('Cart')}>
             <ShoppingIcon />
           </RightButton>
         </Header>
