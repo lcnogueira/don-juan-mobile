@@ -1,5 +1,8 @@
 import { createAppContainer, createSwitchNavigator, createStackNavigator } from 'react-navigation';
 
+import { colors } from './styles';
+
+
 import Main from '~/pages/Main';
 import SignIn from '~/pages/Auth/SignIn';
 import SignUp from '~/pages/Auth/SignUp';

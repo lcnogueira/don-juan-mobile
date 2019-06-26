@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-import { Container, Text } from './styles';
+import { Text } from 'react-native';
 
-const Main = () => (
-  <Container>
-    <Text>Main screen</Text>
-  </Container>
-);
+import MainContainer from '~/components/MainContainer';
+import Header from './header';
+
+class Main extends Component {
+  static navigationOptions = {
+    header: Header,
+  }
+
+  render() {
+    return (
+      <MainContainer>
+        <Header />
+        <Text>Conteúdo aqui...</Text>
+      </MainContainer>
+    );
+  }
+}
 
 export default Main;
