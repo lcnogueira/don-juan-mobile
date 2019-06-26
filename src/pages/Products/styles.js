@@ -1,0 +1,122 @@
+import styled from 'styled-components/native';
+
+import { colors, metrics } from '~/styles';
+
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import CommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+export const Header = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: ${metrics.doubleMargin}px;
+`;
+
+export const LeftButton = styled.TouchableOpacity.attrs({
+  hitSlop: {
+    top: 5,
+    left: 10,
+    rigth: 10,
+    bottom: 5,
+  },
+})``;
+
+export const LeftIcon = styled(Icon).attrs({
+  size: 24,
+  color: colors.white,
+  name: 'history',
+})``;
+
+export const RightButton = styled.TouchableOpacity.attrs({
+  hitSlop: {
+    top: 5,
+    left: 10,
+    rigth: 10,
+    bottom: 5,
+  },
+})`
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background: ${colors.primary};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ShoppingIcon = styled(CommunityIcon).attrs({
+  size: 24,
+  color: colors.white,
+  name: 'shopping',
+})``;
+
+export const Title = styled.Text`
+  font-size: 18px;
+  color: ${colors.white};
+  font-weight: bold;
+  letter-spacing: 0;
+`;
+
+export const ProductsList = styled.FlatList`
+  flex: 1
+`;
+
+export const ProductItem = styled.TouchableOpacity`
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background: ${colors.white};
+  border-radius: ${metrics.doubleRadius}px;
+  margin-bottom: ${metrics.baseMargin}px;
+  padding: 15px;
+  elevation: 6;
+`;
+
+export const ProductImage = styled.Image.attrs({
+  resizeMode: 'contain',
+})`
+  width: 79px;
+  height: 79px;
+  margin-right: ${metrics.baseMargin}px;
+`;
+
+export const Info = styled.View`
+  flex: 1;
+`;
+
+export const Name = styled.Text`
+  font-size: 14px;
+  color: ${colors.secondary};
+  letter-spacing: 0;
+  margin-bottom: 5px;
+  font-weight: bold;
+`;
+
+export const Description = styled.Text`
+  font-size: 12px;
+  color: ${colors.gray};
+  letter-spacing: 0;
+  margin-bottom: 5px;
+  line-height: 14px;
+`;
+
+export const TimeInfo = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const TimeIcon = styled(Icon).attrs({
+  size: 14,
+  color: colors.gray,
+  name: 'timer',
+})`
+`;
+
+export const Time = styled.Text`
+  font-size: 10px;
+  color: ${colors.gray};
+  letter-spacing: 0.46px;
+  margin-left: 2px;
+`;
