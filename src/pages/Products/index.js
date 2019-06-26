@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 
 import MainContainer from '~/components/MainContainer';
+import NavigationService from '~/services/navigation';
 
 import {
-  Header, LeftButton, LeftIcon, RightButton, ShoppingIcon, Title, ProductsList, ProductItem, ProductImage, Info, Description, Name, TimeInfo, TimeIcon, Time,
+  Header, LeftButton, HistoryIcon, RightButton, ShoppingIcon, Title, ProductsList, ProductItem, ProductImage, Info, Description, Name, TimeInfo, TimeIcon, Time,
 } from './styles';
 
 
@@ -47,8 +48,8 @@ class Products extends Component {
     return (
       <MainContainer>
         <Header>
-          <LeftButton onPress={() => { }}>
-            <LeftIcon />
+          <LeftButton onPress={() => NavigationService.navigate('Orders')}>
+            <HistoryIcon />
           </LeftButton>
           <Title>Don Juan Pizzaria</Title>
           <RightButton onPress={() => { }}>
@@ -60,7 +61,7 @@ class Products extends Component {
           keyExtractor={product => String(product.id)}
           showsVerticalScrollIndicator={false}
           renderItem={({ item: product }) => (
-            <ProductItem key={product.id}>
+            <ProductItem key={product.id} onPress={() => { }}>
               <ProductImage source={{ uri: product.image }} />
               <Info>
                 <Name>{product.name}</Name>
@@ -71,7 +72,8 @@ class Products extends Component {
                 </TimeInfo>
               </Info>
             </ProductItem>
-          )}
+          )
+          }
         />
       </MainContainer>
     );

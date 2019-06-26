@@ -1,8 +1,9 @@
 import { createAppContainer, createSwitchNavigator, createStackNavigator } from 'react-navigation';
 
-import Products from '~/pages/Products';
 import SignIn from '~/pages/Auth/SignIn';
 import SignUp from '~/pages/Auth/SignUp';
+import Products from '~/pages/Products';
+import Orders from '~/pages/Orders';
 
 export default function createNavigator(isLoggedIn = false) {
   return createAppContainer(
@@ -11,6 +12,7 @@ export default function createNavigator(isLoggedIn = false) {
       SignUp,
       Main: createStackNavigator({
         Products,
+        Orders,
       }, {
         defaultNavigationOptions: {
           header: null,
