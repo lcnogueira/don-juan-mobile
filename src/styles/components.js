@@ -47,5 +47,11 @@ export const CancelText = styled.Text`
 
 export const PageTitle = styled.Text`
   font-size: 18px;
-  color: ${colors.white}
+  color: ${colors.white};
+`;
+
+export const BackgroundWrapper = styled.ImageBackground.attrs({
+  resizeMode: 'cover',
+})`
+  flex: 1;
 `;

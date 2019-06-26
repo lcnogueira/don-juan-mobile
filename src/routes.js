@@ -1,4 +1,4 @@
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator, createStackNavigator } from 'react-navigation';
 
 import Main from '~/pages/Main';
 import SignIn from '~/pages/Auth/SignIn';
@@ -9,7 +9,13 @@ export default function createNavigator(isLoggedIn = false) {
     createSwitchNavigator({
       SignIn,
       SignUp,
-      Main,
+      Main: createStackNavigator({
+        Main,
+      }, {
+        defaultNavigationOptions: {
+          header: null,
+        },
+      }),
     }, {
       initialRouteName: isLoggedIn ? 'Main' : 'SignIn',
     }),
