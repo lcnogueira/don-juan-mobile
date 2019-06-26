@@ -10,7 +10,7 @@ export const Header = styled.View`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-bottom: ${metrics.doubleMargin}px;
+  margin-bottom: ${metrics.tripleMargin}px;
 `;
 
 export const LeftButton = styled.TouchableOpacity.attrs({
@@ -22,7 +22,7 @@ export const LeftButton = styled.TouchableOpacity.attrs({
   },
 })``;
 
-export const LeftIcon = styled(Icon).attrs({
+export const HistoryIcon = styled(Icon).attrs({
   size: 24,
   color: colors.white,
   name: 'history',
