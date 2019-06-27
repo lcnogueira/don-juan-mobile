@@ -62,7 +62,7 @@ class Cart extends Component {
               <ShoppingButton onPress={() => NavigationService.navigate('Products')}>
                 <ShoppingIcon />
               </ShoppingButton>
-              <OrderButton onPress={() => { }}>
+              <OrderButton onPress={() => NavigationService.navigate('Order')}>
                 <OrderText>MAKE ORDER</OrderText>
                 <RightIcon />
               </OrderButton>
