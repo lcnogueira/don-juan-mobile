@@ -5,6 +5,7 @@ import SignUp from '~/pages/Auth/SignUp';
 import Products from '~/pages/Products';
 import Orders from '~/pages/Orders';
 import Cart from '~/pages/Cart';
+import Order from '~/pages/Order';
 
 export default function createNavigator(isLoggedIn = false) {
   return createAppContainer(
@@ -15,6 +16,7 @@ export default function createNavigator(isLoggedIn = false) {
         Products,
         Orders,
         Cart,
+        Order,
       }, {
         defaultNavigationOptions: {
           header: null,

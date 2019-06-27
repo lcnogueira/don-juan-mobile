@@ -6,12 +6,11 @@ export const Input = styled.TextInput.attrs({
   placeholderTextColor: colors.light,
 })`
   background-color: ${colors.white};
-  border-color: ${colors.darkTransparent};
-  border-width: 1px;
   border-radius: ${metrics.doubleRadius}px;
   height: 44px;
   padding: 0 ${metrics.basePadding}px;
   margin-bottom: ${metrics.baseMargin}px;
+  elevation: 6;
 `;
 
 export const Button = styled.TouchableOpacity`
