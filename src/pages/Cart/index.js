@@ -44,7 +44,7 @@ class Cart extends Component {
           keyExtractor={order => String(order.id)}
           showsVerticalScrollIndicator={false}
           renderItem={({ item: order }) => (
-            <CartItem key={order.id} onPress={() => { }}>
+            <CartItem key={order.id}>
               <ProductImage source={{ uri: order.image }} />
               <Info>
                 <Name>{order.product}</Name>
