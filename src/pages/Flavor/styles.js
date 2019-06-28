@@ -45,7 +45,7 @@ export const FlavorItem = styled.TouchableOpacity`
   align-items: center;
   background: ${colors.white};
   border-radius: ${metrics.doubleRadius}px;
-  padding: ${metrics.basePadding}px;
+  padding: 25px;
   width: ${(metrics.screenWidth - 50) / 2}px;
   margin-bottom: ${metrics.baseMargin}px;
   margin-right: ${metrics.baseMargin}px;
@@ -57,7 +57,7 @@ export const FlavorImage = styled.Image.attrs({
 })`
   width: 120px;
   height: 120px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 `;
 
 export const Name = styled.Text`

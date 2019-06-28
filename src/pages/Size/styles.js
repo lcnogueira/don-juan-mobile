@@ -55,7 +55,7 @@ export const SizeItem = styled.TouchableOpacity`
 export const SizeImage = styled.Image.attrs({
   resizeMode: 'contain',
 })`
-  margin-bottom: 10px;
+  margin-bottom: 25px;
   width: 120px;
   height: 120px;
 `;
@@ -64,15 +64,14 @@ export const Name = styled.Text`
   font-size: 16px;
   color: ${colors.secondary};
   letter-spacing: 0;
-  margin-top: 30px;
   font-weight: bold;
+  margin-bottom: 6px;
 `;
 
 export const Price = styled.Text`
   font-size: 16px;
-  opacity: 0.6;
   color: ${colors.secondary};
   letter-spacing: 0;
   font-weight: bold;
-  margin-top: 6px;
+  opacity: 0.6;
 `;
