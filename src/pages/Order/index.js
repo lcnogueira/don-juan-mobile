@@ -16,11 +16,13 @@ import {
 function Order() {
   const [observation, setObservation] = useState('');
   const [zip, setZip] = useState('');
+  const [city, setCity] = useState('');
   const [street, setStreet] = useState('');
   const [number, setNumber] = useState('');
   const [district, setDistrict] = useState('');
 
   let zipInput;
+  let cityInput;
   let streetInput;
   let numberInput;
   let districtInput;
@@ -58,8 +60,19 @@ function Order() {
             keyboardType="numeric"
             autoCorrect={false}
             returnKeyType="next"
-            onSubmitEditing={() => streetInput.focus()}
+            onSubmitEditing={() => cityInput.focus()}
             ref={(el) => { zipInput = el; }}
+            underlineColorAndroid="transparent"
+          />
+          <Input
+            placeholder="City"
+            value={city}
+            onChangeText={setCity}
+            autoCapitalize="words"
+            autoCorrect={false}
+            returnKeyType="next"
+            onSubmitEditing={() => streetInput.focus()}
+            ref={(el) => { cityInput = el; }}
             underlineColorAndroid="transparent"
           />
           <Input
