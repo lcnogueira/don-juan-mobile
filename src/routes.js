@@ -6,8 +6,8 @@ import Products from '~/pages/Products';
 import Orders from '~/pages/Orders';
 import Cart from '~/pages/Cart';
 import Order from '~/pages/Order';
-import Flavor from '~/pages/Flavor';
-import Size from '~/pages/Size';
+import Types from '~/pages/Types';
+import Sizes from '~/pages/Sizes';
 
 export default function createNavigator(isLoggedIn = false) {
   return createAppContainer(
@@ -19,8 +19,8 @@ export default function createNavigator(isLoggedIn = false) {
         Orders,
         Cart,
         Order,
-        Flavor,
-        Size,
+        Types,
+        Sizes,
       }, {
         defaultNavigationOptions: {
           header: null,

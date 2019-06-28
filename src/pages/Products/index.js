@@ -61,7 +61,7 @@ class Products extends Component {
           keyExtractor={product => String(product.id)}
           showsVerticalScrollIndicator={false}
           renderItem={({ item: product }) => (
-            <ProductItem key={product.id} onPress={() => NavigationService.navigate('Flavor')}>
+            <ProductItem key={product.id} onPress={() => NavigationService.navigate('Types')}>
               <ProductImage source={{ uri: product.image }} />
               <Info>
                 <Name>{product.name}</Name>

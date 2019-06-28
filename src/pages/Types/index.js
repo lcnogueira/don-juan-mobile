@@ -4,13 +4,13 @@ import MainContainer from '~/components/MainContainer';
 import NavigationService from '~/services/navigation';
 
 import {
-  Header, LeftButton, LeftIcon, Title, FlavorList, FlavorItem, FlavorImage, Name,
+  Header, LeftButton, LeftIcon, Title, TypeList, TypeItem, TypeImage, Name,
 } from './styles';
 
 
-class Flavor extends Component {
+class Types extends Component {
   state = {
-    flavors: [
+    types: [
       {
         id: 1, name: 'Calabresa', image: 'https://s3.amazonaws.com/bootcamp.fs/Pizzas/1.png',
       },
@@ -43,7 +43,7 @@ class Flavor extends Component {
   }
 
   render() {
-    const { flavors } = this.state;
+    const { types } = this.state;
 
     return (
       <MainContainer>
@@ -51,18 +51,18 @@ class Flavor extends Component {
           <LeftButton onPress={() => NavigationService.goBack()}>
             <LeftIcon />
           </LeftButton>
-          <Title>Choose a flavor</Title>
+          <Title>Choose a type</Title>
         </Header>
-        <FlavorList
-          data={flavors}
+        <TypeList
+          data={types}
           keyExtractor={flavor => String(flavor.id)}
           numColumns={2}
           showsVerticalScrollIndicator={false}
-          renderItem={({ item: flavor }) => (
-            <FlavorItem key={flavor.id} onPress={() => NavigationService.navigate('Size')}>
-              <FlavorImage source={{ uri: flavor.image }} />
-              <Name>{flavor.name}</Name>
-            </FlavorItem>
+          renderItem={({ item: type }) => (
+            <TypeItem key={type.id} onPress={() => NavigationService.navigate('Sizes')}>
+              <TypeImage source={{ uri: type.image }} />
+              <Name>{type.name}</Name>
+            </TypeItem>
           )
           }
         />
@@ -72,4 +72,4 @@ class Flavor extends Component {
   }
 }
 
-export default Flavor;
+export default Types;

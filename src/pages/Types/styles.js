@@ -37,11 +37,11 @@ export const Title = styled.Text`
   flex: 1;
 `;
 
-export const FlavorList = styled.FlatList`
+export const TypeList = styled.FlatList`
   flex: 1;
 `;
 
-export const FlavorItem = styled.TouchableOpacity`
+export const TypeItem = styled.TouchableOpacity`
   align-items: center;
   background: ${colors.white};
   border-radius: ${metrics.doubleRadius}px;
@@ -52,7 +52,7 @@ export const FlavorItem = styled.TouchableOpacity`
   elevation: 6;
 `;
 
-export const FlavorImage = styled.Image.attrs({
+export const TypeImage = styled.Image.attrs({
   resizeMode: 'contain',
 })`
   width: 120px;

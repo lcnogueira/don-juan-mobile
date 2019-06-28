@@ -8,7 +8,7 @@ import {
 } from './styles';
 
 
-class Flavor extends Component {
+class Sizes extends Component {
   state = {
     sizes: [
       {
@@ -73,4 +73,4 @@ class Flavor extends Component {
   }
 }
 
-export default Flavor;
+export default Sizes;
