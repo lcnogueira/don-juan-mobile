@@ -48,7 +48,7 @@ class Flavor extends Component {
     return (
       <MainContainer>
         <Header>
-          <LeftButton onPress={() => NavigationService.navigate('Products')}>
+          <LeftButton onPress={() => NavigationService.goBack()}>
             <LeftIcon />
           </LeftButton>
           <Title>Choose a flavor</Title>
@@ -59,7 +59,7 @@ class Flavor extends Component {
           numColumns={2}
           showsVerticalScrollIndicator={false}
           renderItem={({ item: flavor }) => (
-            <FlavorItem key={flavor.id} onPress={() => { }}>
+            <FlavorItem key={flavor.id} onPress={() => NavigationService.navigate('Size')}>
               <FlavorImage source={{ uri: flavor.image }} />
               <Name>{flavor.name}</Name>
             </FlavorItem>

@@ -33,7 +33,7 @@ class Orders extends Component {
     return (
       <MainContainer>
         <Header>
-          <LeftButton onPress={() => NavigationService.navigate('Products')}>
+          <LeftButton onPress={() => NavigationService.goBack()}>
             <LeftIcon />
           </LeftButton>
           <Title>My Orderings</Title>

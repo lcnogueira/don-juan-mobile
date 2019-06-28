@@ -32,7 +32,7 @@ function Order() {
   return (
     <MainContainer>
       <Header>
-        <LeftButton onPress={() => NavigationService.navigate('Cart')}>
+        <LeftButton onPress={() => NavigationService.goBack()}>
           <LeftIcon />
         </LeftButton>
         <Title>Make order</Title>
