@@ -37,27 +37,27 @@ export const Title = styled.Text`
   flex: 1;
 `;
 
-export const FlavorList = styled.FlatList`
+export const SizeList = styled.FlatList`
   flex: 1;
 `;
 
-export const FlavorItem = styled.TouchableOpacity`
+export const SizeItem = styled.TouchableOpacity`
   align-items: center;
   background: ${colors.white};
   border-radius: ${metrics.doubleRadius}px;
-  padding: 25px;
+  padding: ${metrics.basePadding}px;
   width: ${(metrics.screenWidth - 50) / 2}px;
   margin-bottom: ${metrics.baseMargin}px;
   margin-right: ${metrics.baseMargin}px;
   elevation: 6;
 `;
 
-export const FlavorImage = styled.Image.attrs({
+export const SizeImage = styled.Image.attrs({
   resizeMode: 'contain',
 })`
+  margin-bottom: 25px;
   width: 120px;
   height: 120px;
-  margin-bottom: 15px;
 `;
 
 export const Name = styled.Text`
@@ -65,4 +65,13 @@ export const Name = styled.Text`
   color: ${colors.secondary};
   letter-spacing: 0;
   font-weight: bold;
+  margin-bottom: 6px;
+`;
+
+export const Price = styled.Text`
+  font-size: 16px;
+  color: ${colors.secondary};
+  letter-spacing: 0;
+  font-weight: bold;
+  opacity: 0.6;
 `;
