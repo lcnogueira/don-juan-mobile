@@ -51,7 +51,7 @@ class Products extends Component {
           <LeftButton onPress={() => NavigationService.navigate('Orders')}>
             <HistoryIcon />
           </LeftButton>
-          <Title>Don Juan Pizzaria</Title>
+          <Title>Don Juan Pizzeria</Title>
           <RightButton onPress={() => NavigationService.navigate('Cart')}>
             <ShoppingIcon />
           </RightButton>

@@ -36,7 +36,7 @@ class Orders extends Component {
           <LeftButton onPress={() => NavigationService.goBack()}>
             <LeftIcon />
           </LeftButton>
-          <Title>My Orderings</Title>
+          <Title>My Orders</Title>
         </Header>
         <OrdersList
           data={orders}

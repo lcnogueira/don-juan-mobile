@@ -63,7 +63,7 @@ class Cart extends Component {
                 <ShoppingIcon />
               </ShoppingButton>
               <OrderButton onPress={() => NavigationService.navigate('Order')}>
-                <OrderText>MAKE ORDER</OrderText>
+                <OrderText>PLACE ORDER</OrderText>
                 <RightIcon />
               </OrderButton>
             </ButtonsContainer>

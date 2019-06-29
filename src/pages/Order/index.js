@@ -16,13 +16,11 @@ import {
 function Order() {
   const [observation, setObservation] = useState('');
   const [zip, setZip] = useState('');
-  const [city, setCity] = useState('');
   const [street, setStreet] = useState('');
   const [number, setNumber] = useState('');
   const [district, setDistrict] = useState('');
 
   let zipInput;
-  let cityInput;
   let streetInput;
   let numberInput;
   let districtInput;
@@ -37,7 +35,7 @@ function Order() {
         <LeftButton onPress={() => NavigationService.goBack()}>
           <LeftIcon />
         </LeftButton>
-        <Title>Make order</Title>
+        <Title>Place order</Title>
         <Ammount>$107.00</Ammount>
       </Header>
       <ContainerAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null}>
@@ -60,19 +58,8 @@ function Order() {
             keyboardType="numeric"
             autoCorrect={false}
             returnKeyType="next"
-            onSubmitEditing={() => cityInput.focus()}
-            ref={(el) => { zipInput = el; }}
-            underlineColorAndroid="transparent"
-          />
-          <Input
-            placeholder="City"
-            value={city}
-            onChangeText={setCity}
-            autoCapitalize="words"
-            autoCorrect={false}
-            returnKeyType="next"
             onSubmitEditing={() => streetInput.focus()}
-            ref={(el) => { cityInput = el; }}
+            ref={(el) => { zipInput = el; }}
             underlineColorAndroid="transparent"
           />
           <Input
@@ -110,7 +97,7 @@ function Order() {
           />
           <ButtonsContainer>
             <CompleteButton onPress={handleSubmit}>
-              <CompleteText>COMPLETE</CompleteText>
+              <CompleteText>FINISH</CompleteText>
               <RightIcon />
             </CompleteButton>
           </ButtonsContainer>
