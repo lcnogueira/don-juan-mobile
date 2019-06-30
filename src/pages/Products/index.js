@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import MainContainer from '~/components/MainContainer';
 import NavigationService from '~/services/navigation';
@@ -7,43 +8,35 @@ import {
   Header, LeftButton, HistoryIcon, RightButton, ShoppingIcon, Title, ProductsList, ProductItem, ProductImage, Info, Description, Name, TimeInfo, TimeIcon, Time,
 } from './styles';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import ProductsActions from '~/store/ducks/products';
 
 class Products extends Component {
-  state = {
-    products: [
-      {
-        id: 1, name: 'Pizzas', description: 'Mais de 50 sabores de pizza em até 4 tamanhos diferentes de fome', time: '30', image: 'https://s3.amazonaws.com/bootcamp.fs/pizzas@1x.png',
-      },
-      {
-        id: 2, name: 'Massas', description: '10 tipos de massas com diferentes molhos para te satisfazer', time: '25', image: 'https://s3.amazonaws.com/bootcamp.fs/massas@1x.png',
-      },
-      {
-        id: 3, name: 'Calzones', description: 'Calzones suber recheados com mais de 50 sabores diferentes', time: '15', image: 'https://s3.amazonaws.com/bootcamp.fs/calzones@1x.png',
-      },
-      {
-        id: 4, name: 'Bebidas não-alcóolicas', description: 'Refrigerantes, sucos, chá gelado, energéticos e água', time: '5', image: 'https://s3.amazonaws.com/bootcamp.fs/bebidas@1x.png',
-      },
-      {
-        id: 5, name: 'Bebidas alcóolicas', description: 'Cervejas artesanais, vinhos e destilados', time: '5', image: 'https://s3.amazonaws.com/bootcamp.fs/bebidas-alcoolicas@1x.png',
-      },
-      {
-        id: 6, name: 'Massas', description: '10 tipos de massas com diferentes molhos para te satisfazer', time: '25', image: 'https://s3.amazonaws.com/bootcamp.fs/massas@1x.png',
-      },
-      {
-        id: 7, name: 'Calzones', description: 'Calzones subper recheados com mais de 50 sabores diferentes', time: '15', image: 'https://s3.amazonaws.com/bootcamp.fs/calzones@1x.png',
-      },
-      {
-        id: 8, name: 'Bebidas não-alcóolicas', description: 'Refrigerantes, sucos, chá gelado, energéticos e água', time: '5', image: 'https://s3.amazonaws.com/bootcamp.fs/bebidas@1x.png',
-      },
-    ],
+  static propTypes = {
+    loadProductsRequest: PropTypes.func.isRequired,
+    products: PropTypes.shape({
+      loading: PropTypes.bool.isRequired,
+      data: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number,
+        name: PropTypes.string,
+        description: PropTypes.string,
+        time: PropTypes.number,
+        file: PropTypes.shape({
+          url: PropTypes.string,
+        }),
+      })),
+    }).isRequired,
   }
 
   componentDidMount() {
+    const { loadProductsRequest } = this.props;
 
+    loadProductsRequest();
   }
 
   render() {
-    const { products } = this.state;
+    const { products } = this.props;
 
     return (
       <MainContainer>
@@ -57,12 +50,12 @@ class Products extends Component {
           </RightButton>
         </Header>
         <ProductsList
-          data={products}
+          data={products.data}
           keyExtractor={product => String(product.id)}
           showsVerticalScrollIndicator={false}
           renderItem={({ item: product }) => (
-            <ProductItem key={product.id} onPress={() => NavigationService.navigate('Types')}>
-              <ProductImage source={{ uri: product.image }} />
+            <ProductItem key={product.id} onPress={() => NavigationService.navigate('Types', product)}>
+              <ProductImage source={{ uri: product.file.url }} />
               <Info>
                 <Name>{product.name}</Name>
                 <Description>{product.description}</Description>
@@ -80,4 +73,10 @@ class Products extends Component {
   }
 }
 
-export default Products;
+const mapStateToProps = state => ({
+  products: state.products,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators(ProductsActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Products);
