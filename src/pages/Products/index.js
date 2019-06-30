@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import MainContainer from '~/components/MainContainer';
+import ContentContainer from '~/components/ContentContainer';
 import NavigationService from '~/services/navigation';
 
 import {
@@ -49,25 +50,27 @@ class Products extends Component {
             <ShoppingIcon />
           </RightButton>
         </Header>
-        <ProductsList
-          data={products.data}
-          keyExtractor={product => String(product.id)}
-          showsVerticalScrollIndicator={false}
-          renderItem={({ item: product }) => (
-            <ProductItem key={product.id} onPress={() => NavigationService.navigate('Types', product)}>
-              <ProductImage source={{ uri: product.file.url }} />
-              <Info>
-                <Name>{product.name}</Name>
-                <Description>{product.description}</Description>
-                <TimeInfo>
-                  <TimeIcon />
-                  <Time>{`${product.time} mins`}</Time>
-                </TimeInfo>
-              </Info>
-            </ProductItem>
-          )
-          }
-        />
+        <ContentContainer loading={products.loading}>
+          <ProductsList
+            data={products.data}
+            keyExtractor={product => String(product.id)}
+            showsVerticalScrollIndicator={false}
+            renderItem={({ item: product }) => (
+              <ProductItem key={product.id} onPress={() => NavigationService.navigate('Types', product)}>
+                <ProductImage source={{ uri: product.file.url }} />
+                <Info>
+                  <Name>{product.name}</Name>
+                  <Description>{product.description}</Description>
+                  <TimeInfo>
+                    <TimeIcon />
+                    <Time>{`${product.time} mins`}</Time>
+                  </TimeInfo>
+                </Info>
+              </ProductItem>
+            )
+            }
+          />
+        </ContentContainer>
       </MainContainer>
     );
   }

@@ -2,7 +2,7 @@ import axios from 'axios';
 import store from '~/store';
 
 const api = axios.create({
-  baseURL: 'http://feb40731.ngrok.io',
+  baseURL: 'http://8f624471.ngrok.io',
 });
 
 api.interceptors.request.use((config) => {
