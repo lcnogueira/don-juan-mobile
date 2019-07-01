@@ -4,9 +4,9 @@ import MainContainer from '~/components/MainContainer';
 import NavigationService from '~/services/navigation';
 
 import {
-  Header, LeftButton, LeftIcon, Title, Ammount, CartList, CartItem, ProductImage, Info, Name, Size, Price, DeleteButton, DeleteIcon, ButtonsContainer, ShoppingButton, ShoppingIcon, OrderButton, OrderText, RightIcon,
+  LeftButton, LeftIcon, Title, Ammount, CartList, CartItem, ProductImage, Info, Name, Size, Price, DeleteButton, DeleteIcon, ButtonsContainer, ShoppingButton, ShoppingIcon, OrderButton, OrderText, RightIcon,
 } from './styles';
-
+import { Header } from '~/styles/components';
 
 class Cart extends Component {
   state = {

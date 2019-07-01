@@ -2,6 +2,14 @@ import styled from 'styled-components/native';
 
 import { colors, metrics } from '~/styles';
 
+export const Header = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: ${metrics.tripleMargin}px;
+`;
+
 export const Input = styled.TextInput.attrs({
   placeholderTextColor: colors.light,
 })`

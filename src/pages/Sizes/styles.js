@@ -4,14 +4,6 @@ import { colors, metrics } from '~/styles';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-export const Header = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  margin-bottom: ${metrics.tripleMargin}px;
-`;
-
 export const LeftButton = styled.TouchableOpacity.attrs({
   hitSlop: {
     top: 5,

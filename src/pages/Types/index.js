@@ -6,8 +6,9 @@ import ContentContainer from '~/components/ContentContainer';
 import NavigationService from '~/services/navigation';
 
 import {
-  Header, LeftButton, LeftIcon, Title, TypeList, TypeItem, TypeImage, Name,
+  LeftButton, LeftIcon, Title, TypeList, TypeItem, TypeImage, Name,
 } from './styles';
+import { Header } from '~/styles/components';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

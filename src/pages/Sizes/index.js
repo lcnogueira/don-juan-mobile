@@ -4,9 +4,9 @@ import MainContainer from '~/components/MainContainer';
 import NavigationService from '~/services/navigation';
 
 import {
-  Header, LeftButton, LeftIcon, Title, SizeList, SizeItem, SizeImage, Name, Price,
+  LeftButton, LeftIcon, Title, SizeList, SizeItem, SizeImage, Name, Price,
 } from './styles';
-
+import { Header } from '~/styles/components';
 
 class Sizes extends Component {
   state = {

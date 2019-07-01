@@ -6,11 +6,11 @@ import MainContainer from '~/components/MainContainer';
 import NavigationService from '~/services/navigation';
 
 import {
-  Input,
+  Input, Header,
 } from '~/styles/components';
 
 import {
-  Header, LeftButton, LeftIcon, Title, Ammount, ContainerAvoidingView, Form, ButtonsContainer, CompleteButton, CompleteText, RightIcon, ObservationInput,
+  LeftButton, LeftIcon, Title, Ammount, ContainerAvoidingView, Form, ButtonsContainer, CompleteButton, CompleteText, RightIcon, ObservationInput,
 } from './styles';
 
 function Order() {
