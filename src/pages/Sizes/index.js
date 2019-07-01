@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import MainContainer from '~/components/MainContainer';
+import ContentContainer from '~/components/ContentContainer';
 import NavigationService from '~/services/navigation';
 
 import {
@@ -8,42 +10,30 @@ import {
 } from './styles';
 import { Header } from '~/styles/components';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import SizesActions from '~/store/ducks/sizes';
+
 class Sizes extends Component {
-  state = {
-    sizes: [
-      {
-        id: 1,
-        name: 'Gigante',
-        image: 'https://s3.amazonaws.com/bootcamp.fs/Tamanhos/tamanho-gg.png',
-        price: '76.00',
-      },
-      {
-        id: 2,
-        name: 'Grande',
-        image: 'https://s3.amazonaws.com/bootcamp.fs/Tamanhos/tamanho-gg.png',
-        price: '59.00',
-      },
-      {
-        id: 3,
-        name: 'Média',
-        image: 'https://s3.amazonaws.com/bootcamp.fs/Tamanhos/tamanho-gg.png',
-        price: '42.00',
-      },
-      {
-        id: 4,
-        name: 'Pequena',
-        image: 'https://s3.amazonaws.com/bootcamp.fs/Tamanhos/tamanho-gg.png',
-        price: '29.00',
-      },
-    ],
+  static propTypes = {
+    typeId: PropTypes.number.isRequired,
+    loadSizesRequest: PropTypes.func.isRequired,
+    sizes: PropTypes.shape({
+      loading: PropTypes.bool.isRequired,
+      data: PropTypes.arrayOf(PropTypes.shape({
+
+      })),
+    }).isRequired,
   }
 
   componentDidMount() {
+    const { typeId, loadSizesRequest } = this.props;
 
+    loadSizesRequest(typeId);
   }
 
   render() {
-    const { sizes } = this.state;
+    const { sizes } = this.props;
 
     return (
       <MainContainer>
@@ -53,24 +43,41 @@ class Sizes extends Component {
           </LeftButton>
           <Title>Choose a size</Title>
         </Header>
-        <SizeList
-          data={sizes}
-          keyExtractor={size => String(size.id)}
-          numColumns={2}
-          showsVerticalScrollIndicator={false}
-          renderItem={({ item: size }) => (
-            <SizeItem key={size.id} onPress={() => NavigationService.navigate('Cart')}>
-              <SizeImage source={{ uri: size.image }} />
-              <Name>{size.name}</Name>
-              <Price>{`$${size.price}`}</Price>
-            </SizeItem>
-          )
-          }
-        />
+        <ContentContainer loading={sizes.loading}>
+          <SizeList
+            data={sizes.data}
+            keyExtractor={size => String(size.id)}
+            numColumns={2}
+            showsVerticalScrollIndicator={false}
+            renderItem={({ item: size }) => (
+              <SizeItem key={size.id} onPress={() => NavigationService.navigate('Cart')}>
+                <SizeImage source={{ uri: size.image }} />
+                <Name>{size.name}</Name>
+                <Price>{`$${size.price}`}</Price>
+              </SizeItem>
+            )
+            }
+          />
+        </ContentContainer>
 
       </MainContainer>
     );
   }
 }
 
-export default Sizes;
+const mapStateToProps = ({ sizes }, { navigation }) => ({
+  typeId: navigation.state.params.type.id,
+  sizes: {
+    ...sizes,
+    data: sizes.data.map(size => ({
+      id: size.size.id,
+      name: size.size.name,
+      price: size.price,
+      image: size.size.file.url,
+    })),
+  },
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators(SizesActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sizes);
