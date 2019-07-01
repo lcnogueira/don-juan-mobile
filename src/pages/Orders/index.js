@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
 import MainContainer from '~/components/MainContainer';
 import ContentContainer from '~/components/ContentContainer';
@@ -18,9 +19,11 @@ class Orders extends Component {
     loadOrdersRequest: PropTypes.func.isRequired,
     orders: PropTypes.shape({
       loading: PropTypes.bool,
-      // data: PropTypes.arrayOf(PropTypes.shape({
-
-      // }))
+      data: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number,
+        date: PropTypes.date,
+        price: PropTypes.number,
+      })),
     }).isRequired,
   }
 
@@ -49,7 +52,7 @@ class Orders extends Component {
             renderItem={({ item: order }) => (
               <OrderItem key={order.id}>
                 <OrderName>{`Order #${order.id}`}</OrderName>
-                <OrderTime>{order.data}</OrderTime>
+                <OrderTime>{moment(order.date).fromNow()}</OrderTime>
                 <OrderPrice>{`$${order.price.toFixed(2)}`}</OrderPrice>
               </OrderItem>
             )}
