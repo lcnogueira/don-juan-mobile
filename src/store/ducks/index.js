@@ -5,12 +5,14 @@ import { reducer as auth } from './auth';
 import { reducer as products } from './products';
 import { reducer as types } from './types';
 import { reducer as orders } from './orders';
+import { reducer as sizes } from './sizes';
 
 const reducers = combineReducers({
   auth,
   products,
   types,
   orders,
+  sizes,
   toast,
 });
 

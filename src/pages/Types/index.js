@@ -31,9 +31,8 @@ class Types extends Component {
   }
 
   componentDidMount() {
-    const { productId } = this.props;
+    const { productId, loadTypesRequest } = this.props;
 
-    const { loadTypesRequest } = this.props;
     loadTypesRequest(productId);
   }
 
@@ -55,7 +54,7 @@ class Types extends Component {
             numColumns={2}
             showsVerticalScrollIndicator={false}
             renderItem={({ item: type }) => (
-              <TypeItem key={type.id} onPress={() => NavigationService.navigate('Sizes')}>
+              <TypeItem key={type.id} onPress={() => NavigationService.navigate('Sizes', { type })}>
                 <TypeImage source={{ uri: type.file.url }} />
                 <Name>{type.name}</Name>
               </TypeItem>

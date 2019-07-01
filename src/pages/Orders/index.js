@@ -68,7 +68,7 @@ const mapStateToProps = ({ orders }) => ({
     ...orders,
     data: orders.data.map(order => ({
       id: order.id,
-      data: order.created_at,
+      date: order.created_at,
       price: order.items.reduce((total, item) => total + (item.quantity * item.typeSize.price), 0.0),
     })),
   },
