@@ -4,11 +4,11 @@ import Immutable from 'seamless-immutable';
 /* Types & Action Creators */
 
 const { Types, Creators } = createActions({
-  loadSizesRequest: ['typeId'],
-  loadSizesSuccess: ['data'],
+  loadTypeSizesRequest: ['typeId'],
+  loadTypeSizesSuccess: ['data'],
 });
 
-export const SizesTypes = Types;
+export const TypeSizesTypes = Types;
 export default Creators;
 
 /* Initial State */
@@ -27,6 +27,6 @@ export const success = (state, { data }) => state.merge({ loading: false, data }
 /* Reducers to types */
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.LOAD_SIZES_REQUEST]: loading,
-  [Types.LOAD_SIZES_SUCCESS]: success,
+  [Types.LOAD_TYPE_SIZES_REQUEST]: loading,
+  [Types.LOAD_TYPE_SIZES_SUCCESS]: success,
 });

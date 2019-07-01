@@ -12,12 +12,12 @@ import { Header } from '~/styles/components';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import SizesActions from '~/store/ducks/sizes';
+import TypeSizesActions from '~/store/ducks/typeSizes';
 
 class Sizes extends Component {
   static propTypes = {
     typeId: PropTypes.number.isRequired,
-    loadSizesRequest: PropTypes.func.isRequired,
+    loadTypeSizesRequest: PropTypes.func.isRequired,
     sizes: PropTypes.shape({
       loading: PropTypes.bool.isRequired,
       data: PropTypes.arrayOf(PropTypes.shape({
@@ -27,9 +27,9 @@ class Sizes extends Component {
   }
 
   componentDidMount() {
-    const { typeId, loadSizesRequest } = this.props;
+    const { typeId, loadTypeSizesRequest } = this.props;
 
-    loadSizesRequest(typeId);
+    loadTypeSizesRequest(typeId);
   }
 
   render() {
@@ -65,19 +65,19 @@ class Sizes extends Component {
   }
 }
 
-const mapStateToProps = ({ sizes }, { navigation }) => ({
+const mapStateToProps = ({ typeSizes }, { navigation }) => ({
   typeId: navigation.state.params.type.id,
   sizes: {
-    ...sizes,
-    data: sizes.data.map(size => ({
-      id: size.size.id,
-      name: size.size.name,
-      price: size.price,
-      image: size.size.file.url,
+    ...typeSizes,
+    data: typeSizes.data.map(typeSize => ({
+      id: typeSize.size.id,
+      name: typeSize.size.name,
+      price: typeSize.price,
+      image: typeSize.size.file.url,
     })),
   },
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators(SizesActions, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators(TypeSizesActions, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sizes);
