@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { Center, Loading } from './styles';
+import { Center, Loading } from '~/styles/components';
 
 const ContentContainer = ({ children, loading = false }) => (
   <Fragment>

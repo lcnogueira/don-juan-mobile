@@ -25,6 +25,7 @@ export function* signIn({ email, password }) {
     yield put(AuthActions.signInSuccess(response.data.token));
     NavigationService.navigate('Main');
   } catch (error) {
+    yield put(AuthActions.signInFail());
     yield put(ToastActionsCreators.displayError('Wrong email/password'));
   }
 }

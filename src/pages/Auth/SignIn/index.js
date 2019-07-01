@@ -6,8 +6,9 @@ import {
   BackgroundWrapper, ContainerAvoidingView, Gradient, InnerContainer, Logo,
 } from '../styles';
 import {
-  LinkButton, Input, Button, ButtonText,
+  LinkButton, Input, Button, ButtonText, Loading,
 } from '~/styles/components';
+
 
 import logo from '~/assets/images/logo3x.png';
 import background from '~/assets/images/background.png';
@@ -18,7 +19,7 @@ import AuthActions from '~/store/ducks/auth';
 
 import NavigationService from '~/services/navigation';
 
-function SignIn({ signInRequest }) {
+function SignIn({ signInRequest, auth }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   let passwordInput;
@@ -57,7 +58,11 @@ function SignIn({ signInRequest }) {
               underlineColorAndroid="transparent"
             />
             <Button onPress={handleSubmit}>
-              <ButtonText>Sign In</ButtonText>
+              {auth.loading ? (
+                <Loading light />
+              ) : (
+                <ButtonText>Sign In</ButtonText>
+              )}
             </Button>
             <LinkButton onPress={() => NavigationService.navigate('SignUp')}>
               <ButtonText>Create free account</ButtonText>
@@ -71,8 +76,15 @@ function SignIn({ signInRequest }) {
 
 SignIn.propTypes = {
   signInRequest: PropTypes.func.isRequired,
+  auth: PropTypes.shape({
+    loading: PropTypes.bool,
+  }).isRequired,
 };
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+});
 
 const mapDispatchToProps = dispatch => bindActionCreators(AuthActions, dispatch);
 
-export default connect(null, mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

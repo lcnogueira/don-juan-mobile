@@ -35,22 +35,15 @@ export const ButtonText = styled.Text`
   color: ${colors.white};
 `;
 
-export const CancelButton = styled.TouchableOpacity`
-  align-items: center;
-  margin-top: ${metrics.doubleMargin}px;
-`;
-
-export const CancelText = styled.Text`
-  color: ${colors.light};
-`;
-
-export const PageTitle = styled.Text`
-  font-size: 18px;
-  color: ${colors.white};
-`;
-
-export const BackgroundWrapper = styled.ImageBackground.attrs({
-  resizeMode: 'cover',
-})`
+export const Center = styled.View`
   flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const Loading = styled.ActivityIndicator.attrs(props => ({
+  size: 'large',
+  color: props.light ? colors.white : colors.secondary,
+}))`
+  font-weight: bold;
 `;
