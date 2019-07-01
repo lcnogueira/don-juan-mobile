@@ -1,49 +1,43 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import MainContainer from '~/components/MainContainer';
+import ContentContainer from '~/components/ContentContainer';
 import NavigationService from '~/services/navigation';
 
 import {
   Header, LeftButton, LeftIcon, Title, TypeList, TypeItem, TypeImage, Name,
 } from './styles';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import TypesActions from '~/store/ducks/types';
 
 class Types extends Component {
-  state = {
-    types: [
-      {
-        id: 1, name: 'Calabresa', image: 'https://s3.amazonaws.com/bootcamp.fs/Pizzas/1.png',
-      },
-      {
-        id: 2, name: 'Frango Frito', image: 'https://s3.amazonaws.com/bootcamp.fs/Pizzas/6.png',
-      },
-      {
-        id: 3, name: 'Marguerita', image: 'https://s3.amazonaws.com/bootcamp.fs/Pizzas/1.png',
-      },
-      {
-        id: 4, name: 'Portuguesa', image: 'https://s3.amazonaws.com/bootcamp.fs/Pizzas/6.png',
-      },
-      {
-        id: 5, name: 'Calabresa', image: 'https://s3.amazonaws.com/bootcamp.fs/Pizzas/1.png',
-      },
-      {
-        id: 6, name: 'Calabresa', image: 'https://s3.amazonaws.com/bootcamp.fs/Pizzas/6.png',
-      },
-      {
-        id: 7, name: 'Calabresa', image: 'https://s3.amazonaws.com/bootcamp.fs/Pizzas/1.png',
-      },
-      {
-        id: 8, name: 'Calabresa', image: 'https://s3.amazonaws.com/bootcamp.fs/Pizzas/6.png',
-      },
-    ],
+  static propTypes = {
+    productId: PropTypes.number.isRequired,
+    loadTypesRequest: PropTypes.func.isRequired,
+    types: PropTypes.shape({
+      loading: PropTypes.bool.isRequired,
+      data: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number,
+        name: PropTypes.string,
+        file: PropTypes.shape({
+          url: PropTypes.string,
+        }),
+      })),
+    }).isRequired,
   }
 
   componentDidMount() {
+    const { productId } = this.props;
 
+    const { loadTypesRequest } = this.props;
+    loadTypesRequest(productId);
   }
 
   render() {
-    const { types } = this.state;
+    const { types } = this.props;
 
     return (
       <MainContainer>
@@ -53,23 +47,31 @@ class Types extends Component {
           </LeftButton>
           <Title>Choose a type</Title>
         </Header>
-        <TypeList
-          data={types}
-          keyExtractor={flavor => String(flavor.id)}
-          numColumns={2}
-          showsVerticalScrollIndicator={false}
-          renderItem={({ item: type }) => (
-            <TypeItem key={type.id} onPress={() => NavigationService.navigate('Sizes')}>
-              <TypeImage source={{ uri: type.image }} />
-              <Name>{type.name}</Name>
-            </TypeItem>
-          )
-          }
-        />
-
+        <ContentContainer loading={types.loading}>
+          <TypeList
+            data={types.data}
+            keyExtractor={type => String(type.id)}
+            numColumns={2}
+            showsVerticalScrollIndicator={false}
+            renderItem={({ item: type }) => (
+              <TypeItem key={type.id} onPress={() => NavigationService.navigate('Sizes')}>
+                <TypeImage source={{ uri: type.file.url }} />
+                <Name>{type.name}</Name>
+              </TypeItem>
+            )
+            }
+          />
+        </ContentContainer>
       </MainContainer>
     );
   }
 }
 
-export default Types;
+const mapStateToProps = (state, { navigation }) => ({
+  types: state.types,
+  productId: navigation.state.params.product.id,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators(TypesActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Types);
