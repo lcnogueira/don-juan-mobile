@@ -36,11 +36,10 @@ export const Title = styled.Text`
 `;
 
 export const OrdersList = styled.FlatList`
-  flex: 1
+  flex: 1;
 `;
 
 export const OrderItem = styled.View`
-  flex: 1;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;

@@ -13,6 +13,7 @@ import {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import OrdersActions from '~/store/ducks/orders';
+import cep from 'cep-promise';
 
 import {
   LeftButton, LeftIcon, Title, Ammount, ContainerAvoidingView, Form, ButtonsContainer, CompleteButton, CompleteText, RightIcon, NoteInput,
@@ -48,6 +49,21 @@ function Order({ totalAmount, cart, createOrderRequest }) {
     createOrderRequest(order);
   }
 
+  async function onZipTyped() {
+    try {
+      if (zip) {
+        const res = await cep(zip);
+        numberInput.focus();
+        setStreet(res.street);
+        setDistrict(res.neighborhood);
+      } else {
+        streetInput.focus();
+      }
+    } catch (error) {
+      streetInput.focus();
+    }
+  }
+
   return (
     <MainContainer>
       <Header>
@@ -77,9 +93,10 @@ function Order({ totalAmount, cart, createOrderRequest }) {
             keyboardType="numeric"
             autoCorrect={false}
             returnKeyType="next"
-            onSubmitEditing={() => streetInput.focus()}
+            onSubmitEditing={text => onZipTyped(text)}
             ref={(el) => { zipInput = el; }}
             underlineColorAndroid="transparent"
+
           />
           <Input
             placeholder="Street"

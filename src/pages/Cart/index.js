@@ -101,7 +101,7 @@ class Cart extends Component {
             )
             : (
               <MessageContainer>
-                <EmptyMessage>There are no products in the cart at the moment.</EmptyMessage>
+                <EmptyMessage>There are no products in the cart.</EmptyMessage>
               </MessageContainer>
             )
           }
