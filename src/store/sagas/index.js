@@ -7,7 +7,7 @@ import { TypeSizesTypes } from '~/store/ducks/typeSizes';
 import { OrdersTypes } from '~/store/ducks/orders';
 
 import {
-  signIn, signOut, init, signUp,
+  signIn, signOut, init, signUp, // getPermissions,
 } from './auth';
 
 import { loadProducts } from './products';
@@ -19,6 +19,7 @@ export default function* rootSaga() {
   yield all([
     init(),
 
+    // takeLatest(AuthTypes.INIT_CHECK_SUCCESS, getPermissions),
     takeLatest(AuthTypes.SIGN_IN_REQUEST, signIn),
     takeLatest(AuthTypes.SIGN_UP_REQUEST, signUp),
     takeLatest(AuthTypes.SIGN_OUT, signOut),

@@ -41,7 +41,6 @@ export const CartList = styled.FlatList`
 `;
 
 export const CartItem = styled.View`
-  flex: 1;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -62,6 +61,38 @@ export const ProductImage = styled.Image.attrs({
 
 export const Info = styled.View`
   flex: 1;
+`;
+
+export const MessageContainer = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const EmptyMessage = styled.Text`
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: ${colors.secondary};
+`;
+
+export const Form = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const AmountInput = styled.TextInput.attrs({
+  underlineColorAndroid: 'transparent',
+})`
+  width: 45px;
+  height: 30px;
+  padding: 0 ${metrics.baseMargin}px;
+  margin-right: ${metrics.baseMargin}px;
+  border-width: 1px;
+  border-color: ${colors.lighter};
+  border-radius: ${metrics.baseRadius}px;
+  font-weight: bold;
+  color: ${colors.darkerTransparent};
 `;
 
 export const Name = styled.Text`
