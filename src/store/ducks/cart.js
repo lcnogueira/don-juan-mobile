@@ -20,11 +20,18 @@ export const INITIAL_STATE = Immutable({
 
 /* Reducers */
 
-export const add = (state, { product }) => state.merge({ data: [...state.data, product] });
+export const add = (state, { product }) => {
+  const found = state.data.find(data => data.id === product.id);
+  if (found) {
+    return state.merge({ data: state.data.map(item => (item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item)) });
+  }
+
+  return state.merge({ data: [...state.data, { ...product, quantity: 1 }] });
+};
 
 export const remove = (state, { product }) => state.merge({ data: state.data.filter(data => data.id !== product.id) });
 
-export const update = (state, { product }) => state.merge({ data: state.map(data => (data.id === product.id ? product : data)) });
+export const update = (state, { id, quantity }) => state.merge({ data: state.data.map(data => (data.id === id ? { ...data, quantity } : data)) });
 
 /* Reducers to types */
 

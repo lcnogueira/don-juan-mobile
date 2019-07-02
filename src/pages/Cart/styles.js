@@ -63,6 +63,25 @@ export const Info = styled.View`
   flex: 1;
 `;
 
+export const Form = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const AmountInput = styled.TextInput.attrs({
+  underlineColorAndroid: 'transparent',
+})`
+  width: 45px;
+  height: 30px;
+  padding: 0 ${metrics.baseMargin}px;
+  margin-right: ${metrics.baseMargin}px;
+  border-width: 1px;
+  border-color: ${colors.lighter};
+  border-radius: ${metrics.baseRadius}px;
+  font-weight: bold;
+  color: ${colors.darkerTransparent};
+`;
+
 export const Name = styled.Text`
   font-size: 12px;
   color: ${colors.secondary};

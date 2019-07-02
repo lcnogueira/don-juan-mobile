@@ -7,7 +7,7 @@ import ContentContainer from '~/components/ContentContainer';
 import NavigationService from '~/services/navigation';
 
 import {
-  LeftButton, LeftIcon, Title, Ammount, CartList, CartItem, ProductImage, Info, Name, Size, Price, DeleteButton, DeleteIcon, ButtonsContainer, ShoppingButton, ShoppingIcon, OrderButton, OrderText, RightIcon,
+  LeftButton, LeftIcon, Title, Ammount, CartList, CartItem, ProductImage, Info, Form, AmountInput, Name, Size, Price, DeleteButton, DeleteIcon, ButtonsContainer, ShoppingButton, ShoppingIcon, OrderButton, OrderText, RightIcon,
 } from './styles';
 import { Header } from '~/styles/components';
 
@@ -29,10 +29,7 @@ class Cart extends Component {
     }).isRequired,
     totalAmount: PropTypes.number.isRequired,
     removeProduct: PropTypes.func.isRequired,
-  }
-
-  componentDidMount() {
-
+    updateProduct: PropTypes.func.isRequired,
   }
 
   confirmDelete = (product) => {
@@ -45,7 +42,7 @@ class Cart extends Component {
   };
 
   render() {
-    const { cart, totalAmount } = this.props;
+    const { cart, totalAmount, updateProduct } = this.props;
     return (
       <MainContainer>
         <Header>
@@ -68,9 +65,22 @@ class Cart extends Component {
                   <Size>{product.size}</Size>
                   <Price>{`$${product.price.toFixed(2)}`}</Price>
                 </Info>
-                <DeleteButton onPress={() => this.confirmDelete(product)}>
-                  <DeleteIcon />
-                </DeleteButton>
+                <Form>
+                  <AmountInput
+                    autoCorrect={false}
+                    autoCapitalize="none"
+                    defaultValue={String(product.quantity)}
+                    maxLength={2}
+                    keyboardType="numeric"
+                    onChangeText={text => updateProduct(product.id, Number(text))
+                    }
+                  >
+                    {product.amount}
+                  </AmountInput>
+                  <DeleteButton onPress={() => this.confirmDelete(product)}>
+                    <DeleteIcon />
+                  </DeleteButton>
+                </Form>
               </CartItem>
             )
             }
@@ -94,7 +104,7 @@ class Cart extends Component {
 
 const mapStateToProps = state => ({
   cart: state.cart,
-  totalAmount: state.cart.data.length > 0 ? state.cart.data.reduce((total, product) => total + product.price, 0) : 0,
+  totalAmount: state.cart.data.length > 0 ? state.cart.data.reduce((total, product) => total + product.price * product.quantity, 0) : 0,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(CartActions, dispatch);

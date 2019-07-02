@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import { Platform } from 'react-native';
 
@@ -9,11 +10,13 @@ import {
   Input, Header,
 } from '~/styles/components';
 
+import { connect } from 'react-redux';
 import {
   LeftButton, LeftIcon, Title, Ammount, ContainerAvoidingView, Form, ButtonsContainer, CompleteButton, CompleteText, RightIcon, ObservationInput,
 } from './styles';
 
-function Order() {
+
+function Order({ totalAmount }) {
   const [observation, setObservation] = useState('');
   const [zip, setZip] = useState('');
   const [street, setStreet] = useState('');
@@ -36,7 +39,7 @@ function Order() {
           <LeftIcon />
         </LeftButton>
         <Title>Place order</Title>
-        <Ammount>$107.00</Ammount>
+        <Ammount>{`$${totalAmount.toFixed(2)}`}</Ammount>
       </Header>
       <ContainerAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null}>
         <Form>
@@ -107,4 +110,12 @@ function Order() {
   );
 }
 
-export default Order;
+Order.propTypes = {
+  totalAmount: PropTypes.number.isRequired,
+};
+
+const mapStateToProps = state => ({
+  totalAmount: state.cart.data.length > 0 ? state.cart.data.reduce((total, product) => total + product.price * product.quantity, 0) : 0,
+});
+
+export default connect(mapStateToProps)(Order);
