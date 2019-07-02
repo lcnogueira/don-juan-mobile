@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Alert } from 'react-native';
 
 import MainContainer from '~/components/MainContainer';
 import ContentContainer from '~/components/ContentContainer';
@@ -27,15 +28,24 @@ class Cart extends Component {
       })),
     }).isRequired,
     totalAmount: PropTypes.number.isRequired,
+    removeProduct: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
 
   }
 
+  confirmDelete = (product) => {
+    const { removeProduct } = this.props;
+
+    Alert.alert('Remove item', 'Are you sure you want to delete this item?', [
+      { text: 'Cancel' },
+      { text: 'Yes', onPress: () => removeProduct(product) },
+    ]);
+  };
+
   render() {
     const { cart, totalAmount } = this.props;
-    console.tron.log('totalAmount', totalAmount);
     return (
       <MainContainer>
         <Header>
@@ -43,7 +53,7 @@ class Cart extends Component {
             <LeftIcon />
           </LeftButton>
           <Title>Cart</Title>
-          <Ammount>{`$${totalAmount}`}</Ammount>
+          <Ammount>{`$${totalAmount.toFixed(2)}`}</Ammount>
         </Header>
         <ContentContainer>
           <CartList
@@ -58,7 +68,7 @@ class Cart extends Component {
                   <Size>{product.size}</Size>
                   <Price>{`$${product.price.toFixed(2)}`}</Price>
                 </Info>
-                <DeleteButton onPress={() => { }}>
+                <DeleteButton onPress={() => this.confirmDelete(product)}>
                   <DeleteIcon />
                 </DeleteButton>
               </CartItem>
