@@ -43,6 +43,26 @@ export const ShoppingIcon = styled(CommunityIcon).attrs({
   name: 'shopping',
 })``;
 
+export const BadgeText = styled.Text`
+    color: ${colors.secondary};
+    font-size: 10px;
+    font-weight: bold;
+`;
+
+export const BadgeView = styled.View`
+    position:absolute;
+    z-index:1;
+    top:0px;
+    right:0px;
+    padding:1px;
+    background-color: #FFC108;
+    border-radius:50px;
+    width:15px;
+    height:15px;
+    align-items: center;
+    justify-content: center;
+`;
+
 export const Title = styled.Text`
   font-size: 18px;
   color: ${colors.white};

@@ -6,7 +6,7 @@ import ContentContainer from '~/components/ContentContainer';
 import NavigationService from '~/services/navigation';
 
 import {
-  LeftButton, HistoryIcon, RightButton, ShoppingIcon, Title, ProductsList, ProductItem, ProductImage, Info, Description, Name, TimeInfo, TimeIcon, Time,
+  LeftButton, HistoryIcon, RightButton, ShoppingIcon, Title, ProductsList, ProductItem, ProductImage, Info, Description, Name, TimeInfo, TimeIcon, Time, BadgeText, BadgeView,
 } from './styles';
 import { Header } from '~/styles/components';
 
@@ -29,6 +29,7 @@ class Products extends Component {
         }),
       })),
     }).isRequired,
+    cartSize: PropTypes.number.isRequired,
   }
 
   componentDidMount() {
@@ -38,7 +39,7 @@ class Products extends Component {
   }
 
   render() {
-    const { products } = this.props;
+    const { products, cartSize } = this.props;
 
     return (
       <MainContainer>
@@ -49,6 +50,11 @@ class Products extends Component {
           <Title>Don Juan Pizzeria</Title>
           <RightButton onPress={() => NavigationService.navigate('Cart')}>
             <ShoppingIcon />
+            {!!cartSize && (
+              <BadgeView>
+                <BadgeText>{cartSize}</BadgeText>
+              </BadgeView>
+            )}
           </RightButton>
         </Header>
         <ContentContainer loading={products.loading}>
@@ -79,6 +85,7 @@ class Products extends Component {
 
 const mapStateToProps = state => ({
   products: state.products,
+  cartSize: state.cart.data.length || 0,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(ProductsActions, dispatch);
