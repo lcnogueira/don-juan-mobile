@@ -70,10 +70,6 @@ export const Title = styled.Text`
   letter-spacing: 0;
 `;
 
-export const ProductsList = styled.FlatList`
-  flex: 1
-`;
-
 export const ProductItem = styled.TouchableOpacity`
   flex: 1;
   flex-direction: row;

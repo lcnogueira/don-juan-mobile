@@ -6,9 +6,9 @@ import ContentContainer from '~/components/ContentContainer';
 import NavigationService from '~/services/navigation';
 
 import {
-  LeftButton, LeftIcon, Title, SizeList, SizeItem, SizeImage, Name, Price,
+  LeftButton, LeftIcon, Title, SizeItem, SizeImage, Name, Price,
 } from './styles';
-import { Header } from '~/styles/components';
+import { Header, List as SizesList } from '~/styles/components';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -55,7 +55,7 @@ class Sizes extends Component {
           <Title>Choose a size</Title>
         </Header>
         <ContentContainer loading={sizes.loading}>
-          <SizeList
+          <SizesList
             data={sizes.data}
             keyExtractor={size => String(size.id)}
             numColumns={2}

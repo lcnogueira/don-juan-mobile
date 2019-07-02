@@ -36,10 +36,6 @@ export const Ammount = styled.Text`
   letter-spacing: 0;
 `;
 
-export const CartList = styled.FlatList`
-  flex: 1
-`;
-
 export const CartItem = styled.View`
   flex-direction: row;
   align-items: center;

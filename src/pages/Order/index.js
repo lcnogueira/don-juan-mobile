@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { Platform } from 'react-native';
-
 import MainContainer from '~/components/MainContainer';
 import NavigationService from '~/services/navigation';
 
@@ -16,7 +14,7 @@ import OrdersActions from '~/store/ducks/orders';
 import cep from 'cep-promise';
 
 import {
-  LeftButton, LeftIcon, Title, Ammount, ContainerAvoidingView, Form, ButtonsContainer, CompleteButton, CompleteText, RightIcon, NoteInput,
+  LeftButton, LeftIcon, Title, Ammount, ContainerAvoidingView, ButtonsContainer, CompleteButton, CompleteText, RightIcon, NoteInput, InnerView,
 } from './styles';
 
 
@@ -73,8 +71,8 @@ function Order({ totalAmount, cart, createOrderRequest }) {
         <Title>Place order</Title>
         <Ammount>{`$${totalAmount.toFixed(2)}`}</Ammount>
       </Header>
-      <ContainerAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null}>
-        <Form>
+      <ContainerAvoidingView>
+        <InnerView>
           <NoteInput
             placeholder="Any notes?"
             value={note}
@@ -137,7 +135,7 @@ function Order({ totalAmount, cart, createOrderRequest }) {
               <RightIcon />
             </CompleteButton>
           </ButtonsContainer>
-        </Form>
+        </InnerView>
       </ContainerAvoidingView>
     </MainContainer>
   );

@@ -4,13 +4,6 @@ import { colors, metrics } from '~/styles';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-export const Header = styled.View`
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-  margin-bottom: ${metrics.tripleMargin}px;
-`;
-
 export const LeftButton = styled.TouchableOpacity.attrs({
   hitSlop: {
     top: 5,
@@ -33,9 +26,6 @@ export const Title = styled.Text`
   color: ${colors.white};
   font-weight: bold;
   letter-spacing: 0;
-`;
-
-export const OrdersList = styled.FlatList`
   flex: 1;
 `;
 
