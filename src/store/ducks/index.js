@@ -6,6 +6,7 @@ import { reducer as products } from './products';
 import { reducer as types } from './types';
 import { reducer as orders } from './orders';
 import { reducer as typeSizes } from './typeSizes';
+import { reducer as cart } from './cart';
 
 const reducers = combineReducers({
   auth,
@@ -13,6 +14,7 @@ const reducers = combineReducers({
   types,
   orders,
   typeSizes,
+  cart,
   toast,
 });
 

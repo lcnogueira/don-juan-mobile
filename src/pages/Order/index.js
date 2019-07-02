@@ -41,7 +41,7 @@ function Order() {
       <ContainerAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null}>
         <Form>
           <ObservationInput
-            placeholder="Any observation?"
+            placeholder="Any notes?"
             value={observation}
             onChangeText={setObservation}
             autoCapitalize="sentences"

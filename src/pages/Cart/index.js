@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import MainContainer from '~/components/MainContainer';
+import ContentContainer from '~/components/ContentContainer';
 import NavigationService from '~/services/navigation';
 
 import {
@@ -8,19 +10,23 @@ import {
 } from './styles';
 import { Header } from '~/styles/components';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import CartActions from '~/store/ducks/cart';
+
 class Cart extends Component {
-  state = {
-    orders: [
-      {
-        id: 1, product: 'Pizza Calabresa', size: 'Tamanho: Média', price: '42.00', image: 'https://s3.amazonaws.com/bootcamp.fs/Pizzas/1.png',
-      },
-      {
-        id: 2, product: 'Pizza 4 Queijos', size: 'Tamanho Pequena', price: '29.00', image: 'https://s3.amazonaws.com/bootcamp.fs/Pizzas/6.png',
-      },
-      {
-        id: 3, product: 'Coca-cola', size: 'Lata 300ML', price: '6.00', image: 'https://s3.amazonaws.com/bootcamp.fs/bebidas@1x.png',
-      },
-    ],
+  static propTypes = {
+    cart: PropTypes.shape({
+      loading: PropTypes.bool,
+      data: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number,
+        image: PropTypes.string,
+        name: PropTypes.string,
+        size: PropTypes.string,
+        price: PropTypes.number,
+      })),
+    }).isRequired,
+    totalAmount: PropTypes.number.isRequired,
   }
 
   componentDidMount() {
@@ -28,8 +34,8 @@ class Cart extends Component {
   }
 
   render() {
-    const { orders } = this.state;
-
+    const { cart, totalAmount } = this.props;
+    console.tron.log('totalAmount', totalAmount);
     return (
       <MainContainer>
         <Header>
@@ -37,42 +43,50 @@ class Cart extends Component {
             <LeftIcon />
           </LeftButton>
           <Title>Cart</Title>
-          <Ammount>$107.00</Ammount>
+          <Ammount>{`$${totalAmount}`}</Ammount>
         </Header>
-        <CartList
-          data={orders}
-          keyExtractor={order => String(order.id)}
-          showsVerticalScrollIndicator={false}
-          renderItem={({ item: order }) => (
-            <CartItem key={order.id}>
-              <ProductImage source={{ uri: order.image }} />
-              <Info>
-                <Name>{order.product}</Name>
-                <Size>{order.size}</Size>
-                <Price>{`$${order.price}`}</Price>
-              </Info>
-              <DeleteButton onPress={() => { }}>
-                <DeleteIcon />
-              </DeleteButton>
-            </CartItem>
-          )
-          }
-          ListFooterComponent={() => (
-            <ButtonsContainer>
-              <ShoppingButton onPress={() => NavigationService.navigate('Products')}>
-                <ShoppingIcon />
-              </ShoppingButton>
-              <OrderButton onPress={() => NavigationService.navigate('Order')}>
-                <OrderText>PLACE ORDER</OrderText>
-                <RightIcon />
-              </OrderButton>
-            </ButtonsContainer>
-          )}
-        />
-
+        <ContentContainer>
+          <CartList
+            data={cart.data}
+            keyExtractor={product => String(product.id)}
+            showsVerticalScrollIndicator={false}
+            renderItem={({ item: product }) => (
+              <CartItem key={product.id}>
+                <ProductImage source={{ uri: product.image }} />
+                <Info>
+                  <Name>{product.name}</Name>
+                  <Size>{product.size}</Size>
+                  <Price>{`$${product.price.toFixed(2)}`}</Price>
+                </Info>
+                <DeleteButton onPress={() => { }}>
+                  <DeleteIcon />
+                </DeleteButton>
+              </CartItem>
+            )
+            }
+            ListFooterComponent={() => (
+              <ButtonsContainer>
+                <ShoppingButton onPress={() => NavigationService.navigate('Products')}>
+                  <ShoppingIcon />
+                </ShoppingButton>
+                <OrderButton onPress={() => NavigationService.navigate('Order')}>
+                  <OrderText>PLACE ORDER</OrderText>
+                  <RightIcon />
+                </OrderButton>
+              </ButtonsContainer>
+            )}
+          />
+        </ContentContainer>
       </MainContainer>
     );
   }
 }
 
-export default Cart;
+const mapStateToProps = state => ({
+  cart: state.cart,
+  totalAmount: state.cart.data.length > 0 ? state.cart.data.reduce((total, product) => total + product.price, 0) : 0,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators(CartActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
