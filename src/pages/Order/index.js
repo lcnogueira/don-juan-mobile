@@ -11,13 +11,16 @@ import {
 } from '~/styles/components';
 
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import OrdersActions from '~/store/ducks/orders';
+
 import {
-  LeftButton, LeftIcon, Title, Ammount, ContainerAvoidingView, Form, ButtonsContainer, CompleteButton, CompleteText, RightIcon, ObservationInput,
+  LeftButton, LeftIcon, Title, Ammount, ContainerAvoidingView, Form, ButtonsContainer, CompleteButton, CompleteText, RightIcon, NoteInput,
 } from './styles';
 
 
-function Order({ totalAmount }) {
-  const [observation, setObservation] = useState('');
+function Order({ totalAmount, cart, createOrderRequest }) {
+  const [note, setNote] = useState('');
   const [zip, setZip] = useState('');
   const [street, setStreet] = useState('');
   const [number, setNumber] = useState('');
@@ -29,7 +32,20 @@ function Order({ totalAmount }) {
   let districtInput;
 
   function handleSubmit() {
+    const order = {
+      note,
+      zip_code: zip,
+      street,
+      number,
+      district,
+      delivered: false,
+      items: cart.data.map(item => ({
+        type_size_id: item.id,
+        quantity: item.quantity,
+      })),
+    };
 
+    createOrderRequest(order);
   }
 
   return (
@@ -43,10 +59,10 @@ function Order({ totalAmount }) {
       </Header>
       <ContainerAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null}>
         <Form>
-          <ObservationInput
+          <NoteInput
             placeholder="Any notes?"
-            value={observation}
-            onChangeText={setObservation}
+            value={note}
+            onChangeText={setNote}
             autoCapitalize="sentences"
             autoCorrect
             returnKeyType="next"
@@ -112,10 +128,22 @@ function Order({ totalAmount }) {
 
 Order.propTypes = {
   totalAmount: PropTypes.number.isRequired,
+  cart: PropTypes.shape({
+    data: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        quantity: PropTypes.number,
+      }),
+    ),
+  }).isRequired,
+  createOrderRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
+  cart: state.cart,
   totalAmount: state.cart.data.length > 0 ? state.cart.data.reduce((total, product) => total + product.price * product.quantity, 0) : 0,
 });
 
-export default connect(mapStateToProps)(Order);
+const mapDispatchToProps = dispatch => bindActionCreators(OrdersActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Order);

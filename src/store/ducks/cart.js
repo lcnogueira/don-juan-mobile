@@ -7,6 +7,7 @@ const { Types, Creators } = createActions({
   addProduct: ['product'],
   removeProduct: ['product'],
   updateProduct: ['id', 'quantity'],
+  emptyCart: null,
 });
 
 export const CartTypes = Types;
@@ -33,10 +34,13 @@ export const remove = (state, { product }) => state.merge({ data: state.data.fil
 
 export const update = (state, { id, quantity }) => state.merge({ data: state.data.map(data => (data.id === id ? { ...data, quantity } : data)) });
 
+export const empty = state => state.merge({ data: [] });
+
 /* Reducers to types */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.ADD_PRODUCT]: add,
   [Types.REMOVE_PRODUCT]: remove,
   [Types.UPDATE_PRODUCT]: update,
+  [Types.EMPTY_CART]: empty,
 });

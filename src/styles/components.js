@@ -50,7 +50,7 @@ export const Center = styled.View`
 `;
 
 export const Loading = styled.ActivityIndicator.attrs(props => ({
-  size: 'large',
+  size: props.small ? 'small' : 'large',
   color: props.light ? colors.white : colors.secondary,
 }))`
   font-weight: bold;

@@ -50,7 +50,7 @@ export const ContainerAvoidingView = styled.KeyboardAvoidingView`
 
 export const Form = styled.View``;
 
-export const ObservationInput = styled.TextInput.attrs({
+export const NoteInput = styled.TextInput.attrs({
   placeholderTextColor: colors.light,
   textAlignVertical: 'top',
 })`

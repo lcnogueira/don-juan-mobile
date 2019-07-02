@@ -13,7 +13,8 @@ import {
 import { loadProducts } from './products';
 import { loadTypes } from './types';
 import { loadTypeSizes } from './typeSizes';
-import { loadOrders } from './orders';
+import { loadOrders, createOrder } from './orders';
+import { emptyCart } from './cart';
 
 export default function* rootSaga() {
   yield all([
@@ -29,5 +30,7 @@ export default function* rootSaga() {
     takeLatest(TypeSizesTypes.LOAD_TYPE_SIZES_REQUEST, loadTypeSizes),
     takeLatest(OrdersTypes.LOAD_ORDERS_REQUEST, loadOrders),
 
+    takeLatest(OrdersTypes.CREATE_ORDER_REQUEST, createOrder),
+    takeLatest(OrdersTypes.CREATE_ORDER_SUCCESS, emptyCart),
   ]);
 }
