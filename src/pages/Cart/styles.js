@@ -63,6 +63,19 @@ export const Info = styled.View`
   flex: 1;
 `;
 
+export const MessageContainer = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const EmptyMessage = styled.Text`
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: ${colors.secondary};
+`;
+
 export const Form = styled.View`
   flex-direction: row;
   align-items: center;

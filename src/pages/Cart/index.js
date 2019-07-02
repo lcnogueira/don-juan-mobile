@@ -7,7 +7,7 @@ import ContentContainer from '~/components/ContentContainer';
 import NavigationService from '~/services/navigation';
 
 import {
-  LeftButton, LeftIcon, Title, Ammount, CartList, CartItem, ProductImage, Info, Form, AmountInput, Name, Size, Price, DeleteButton, DeleteIcon, ButtonsContainer, ShoppingButton, ShoppingIcon, OrderButton, OrderText, RightIcon,
+  LeftButton, LeftIcon, Title, Ammount, CartList, CartItem, ProductImage, Info, MessageContainer, EmptyMessage, Form, AmountInput, Name, Size, Price, DeleteButton, DeleteIcon, ButtonsContainer, ShoppingButton, ShoppingIcon, OrderButton, OrderText, RightIcon,
 } from './styles';
 import { Header } from '~/styles/components';
 
@@ -53,49 +53,58 @@ class Cart extends Component {
           <Ammount>{`$${totalAmount.toFixed(2)}`}</Ammount>
         </Header>
         <ContentContainer>
-          <CartList
-            data={cart.data}
-            keyExtractor={product => String(product.id)}
-            showsVerticalScrollIndicator={false}
-            renderItem={({ item: product }) => (
-              <CartItem key={product.id}>
-                <ProductImage source={{ uri: product.image }} />
-                <Info>
-                  <Name>{product.name}</Name>
-                  <Size>{product.size}</Size>
-                  <Price>{`$${product.price.toFixed(2)}`}</Price>
-                </Info>
-                <Form>
-                  <AmountInput
-                    autoCorrect={false}
-                    autoCapitalize="none"
-                    defaultValue={String(product.quantity)}
-                    maxLength={2}
-                    keyboardType="numeric"
-                    onChangeText={text => updateProduct(product.id, Number(text))
-                    }
-                  >
-                    {product.amount}
-                  </AmountInput>
-                  <DeleteButton onPress={() => this.confirmDelete(product)}>
-                    <DeleteIcon />
-                  </DeleteButton>
-                </Form>
-              </CartItem>
+          {cart.data.length > 0
+            ? (
+              <CartList
+                data={cart.data}
+                keyExtractor={product => String(product.id)}
+                showsVerticalScrollIndicator={false}
+                renderItem={({ item: product }) => (
+                  <CartItem key={product.id}>
+                    <ProductImage source={{ uri: product.image }} />
+                    <Info>
+                      <Name>{product.name}</Name>
+                      <Size>{product.size}</Size>
+                      <Price>{`$${product.price.toFixed(2)}`}</Price>
+                    </Info>
+                    <Form>
+                      <AmountInput
+                        autoCorrect={false}
+                        autoCapitalize="none"
+                        defaultValue={String(product.quantity)}
+                        maxLength={2}
+                        keyboardType="numeric"
+                        onChangeText={text => updateProduct(product.id, Number(text))
+                        }
+                      >
+                        {product.amount}
+                      </AmountInput>
+                      <DeleteButton onPress={() => this.confirmDelete(product)}>
+                        <DeleteIcon />
+                      </DeleteButton>
+                    </Form>
+                  </CartItem>
+                )
+                }
+                ListFooterComponent={() => (
+                  <ButtonsContainer>
+                    <ShoppingButton onPress={() => NavigationService.navigate('Products')}>
+                      <ShoppingIcon />
+                    </ShoppingButton>
+                    <OrderButton onPress={() => NavigationService.navigate('Order')}>
+                      <OrderText>PLACE ORDER</OrderText>
+                      <RightIcon />
+                    </OrderButton>
+                  </ButtonsContainer>
+                )}
+              />
             )
-            }
-            ListFooterComponent={() => (
-              <ButtonsContainer>
-                <ShoppingButton onPress={() => NavigationService.navigate('Products')}>
-                  <ShoppingIcon />
-                </ShoppingButton>
-                <OrderButton onPress={() => NavigationService.navigate('Order')}>
-                  <OrderText>PLACE ORDER</OrderText>
-                  <RightIcon />
-                </OrderButton>
-              </ButtonsContainer>
-            )}
-          />
+            : (
+              <MessageContainer>
+                <EmptyMessage>There are no products in the car at the moment.</EmptyMessage>
+              </MessageContainer>
+            )
+          }
         </ContentContainer>
       </MainContainer>
     );
