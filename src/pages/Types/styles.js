@@ -29,10 +29,6 @@ export const Title = styled.Text`
   flex: 1;
 `;
 
-export const TypeList = styled.FlatList`
-  flex: 1;
-`;
-
 export const TypeItem = styled.TouchableOpacity`
   align-items: center;
   background: ${colors.white};

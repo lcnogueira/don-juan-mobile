@@ -7,8 +7,9 @@ import ContentContainer from '~/components/ContentContainer';
 import NavigationService from '~/services/navigation';
 
 import {
-  Header, LeftButton, LeftIcon, Title, OrdersList, OrderItem, OrderName, OrderTime, OrderPrice,
+  LeftButton, LeftIcon, Title, OrderItem, OrderName, OrderTime, OrderPrice,
 } from './styles';
+import { Header, List as OrdersList } from '~/styles/components';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

@@ -45,20 +45,20 @@ export const ShoppingIcon = styled(CommunityIcon).attrs({
 
 export const BadgeText = styled.Text`
     color: ${colors.secondary};
-    font-size: 10px;
+    font-size: 12px;
     font-weight: bold;
 `;
 
 export const BadgeView = styled.View`
     position:absolute;
     z-index:1;
-    top:0px;
-    right:0px;
+    top:-3px;
+    right:-3px;
     padding:1px;
     background-color: #FFC108;
     border-radius:50px;
-    width:15px;
-    height:15px;
+    width:20px;
+    height:20px;
     align-items: center;
     justify-content: center;
 `;
@@ -68,10 +68,6 @@ export const Title = styled.Text`
   color: ${colors.white};
   font-weight: bold;
   letter-spacing: 0;
-`;
-
-export const ProductsList = styled.FlatList`
-  flex: 1
 `;
 
 export const ProductItem = styled.TouchableOpacity`

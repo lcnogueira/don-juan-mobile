@@ -6,9 +6,9 @@ import ContentContainer from '~/components/ContentContainer';
 import NavigationService from '~/services/navigation';
 
 import {
-  LeftButton, HistoryIcon, RightButton, ShoppingIcon, Title, ProductsList, ProductItem, ProductImage, Info, Description, Name, TimeInfo, TimeIcon, Time, BadgeText, BadgeView,
+  LeftButton, HistoryIcon, RightButton, ShoppingIcon, Title, ProductItem, ProductImage, Info, Description, Name, TimeInfo, TimeIcon, Time, BadgeText, BadgeView,
 } from './styles';
-import { Header } from '~/styles/components';
+import { Header, List as ProductsList } from '~/styles/components';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

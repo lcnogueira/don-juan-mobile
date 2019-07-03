@@ -7,7 +7,18 @@ export const Header = styled.View`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  padding: ${metrics.basePadding}px ${metrics.basePadding}px 0;
   margin-bottom: ${metrics.tripleMargin}px;
+`;
+
+export const List = styled.FlatList.attrs({
+  contentContainerStyle: {
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 20,
+  },
+})`
+  flex: 1
 `;
 
 export const Input = styled.TextInput.attrs({

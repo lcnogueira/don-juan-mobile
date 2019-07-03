@@ -7,9 +7,9 @@ import ContentContainer from '~/components/ContentContainer';
 import NavigationService from '~/services/navigation';
 
 import {
-  LeftButton, LeftIcon, Title, Ammount, CartList, CartItem, ProductImage, Info, MessageContainer, EmptyMessage, Form, AmountInput, Name, Size, Price, DeleteButton, DeleteIcon, ButtonsContainer, ShoppingButton, ShoppingIcon, OrderButton, OrderText, RightIcon,
+  LeftButton, LeftIcon, Title, Ammount, CartItem, ProductImage, Info, MessageContainer, EmptyMessage, Form, AmountInput, Name, Size, Price, DeleteButton, DeleteIcon, ButtonsContainer, ShoppingButton, ShoppingIcon, OrderButton, OrderText, RightIcon,
 } from './styles';
-import { Header } from '~/styles/components';
+import { Header, List as CartList } from '~/styles/components';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

@@ -6,9 +6,9 @@ import ContentContainer from '~/components/ContentContainer';
 import NavigationService from '~/services/navigation';
 
 import {
-  LeftButton, LeftIcon, Title, TypeList, TypeItem, TypeImage, Name,
+  LeftButton, LeftIcon, Title, TypeItem, TypeImage, Name,
 } from './styles';
-import { Header } from '~/styles/components';
+import { Header, List as TypesList } from '~/styles/components';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -48,7 +48,7 @@ class Types extends Component {
           <Title>Choose a type</Title>
         </Header>
         <ContentContainer loading={types.loading}>
-          <TypeList
+          <TypesList
             data={types.data}
             keyExtractor={type => String(type.id)}
             numColumns={2}

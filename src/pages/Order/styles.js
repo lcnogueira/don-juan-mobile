@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { Platform } from 'react-native';
 
 import { colors, metrics } from '~/styles';
 
@@ -44,11 +45,25 @@ export const Ammount = styled.Text`
   letter-spacing: 0;
 `;
 
-export const ContainerAvoidingView = styled.KeyboardAvoidingView`
-  flex: 1
+export const ContainerAvoidingView = styled.KeyboardAvoidingView.attrs({
+  behavior: Platform.OS === 'ios' ? 'padding' : null,
+  keyboardVerticalOffset: 95,
+  enabled: Platform.OS === 'ios',
+})`
+  flex: 1;
 `;
 
-export const Form = styled.View``;
+export const InnerView = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
+  showsVerticalScrollIndicator: false,
+})``;
+
+export const Form = styled.View`
+  flex: 1;
+`;
 
 export const NoteInput = styled.TextInput.attrs({
   placeholderTextColor: colors.light,

@@ -4,7 +4,6 @@ import { metrics } from '~/styles';
 
 export const Container = styled.View`
   flex: 1;
-  padding: ${metrics.basePadding}px;
 `;
 
 export const Background = styled.Image`
