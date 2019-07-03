@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 import MainContainer from '~/components/MainContainer';
 import NavigationService from '~/services/navigation';
@@ -24,6 +25,7 @@ function Order({ totalAmount, cart, createOrderRequest }) {
   const [street, setStreet] = useState('');
   const [number, setNumber] = useState('');
   const [district, setDistrict] = useState('');
+  const [loadingSpinner, setLoadingSpinner] = useState(false);
 
   let zipInput;
   let streetInput;
@@ -50,20 +52,27 @@ function Order({ totalAmount, cart, createOrderRequest }) {
   async function onZipTyped() {
     try {
       if (zip) {
+        setLoadingSpinner(true);
         const res = await cep(zip);
-        numberInput.focus();
+        setTimeout(() => {
+          setLoadingSpinner(false);
+        }, 4000);
         setStreet(res.street);
         setDistrict(res.neighborhood);
+        setLoadingSpinner(false);
       } else {
         streetInput.focus();
       }
     } catch (error) {
-      streetInput.focus();
+      setLoadingSpinner(false);
     }
   }
 
   return (
     <MainContainer>
+      <Spinner
+        visible={loadingSpinner}
+      />
       <Header>
         <LeftButton onPress={() => NavigationService.goBack()}>
           <LeftIcon />
