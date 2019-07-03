@@ -2,7 +2,7 @@
 
 1. Clone this project.
 2. Install the dependencies: `yarn install`.
-3. Update the environment variables file (`.env`).
+3. Make sure the backend has been started.
 4. Start the app: `react-native run-android`.
 
 ### React Native Boilerplate
