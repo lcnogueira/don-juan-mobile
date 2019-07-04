@@ -84,7 +84,7 @@ export const ButtonsContainer = styled.View`
 `;
 
 export const CompleteButton = styled.TouchableOpacity`
-  background-color: ${colors.danger};
+  background-color: ${colors.primary};
   flex-direction: row;
   align-items: center;
   justify-content: space-between;

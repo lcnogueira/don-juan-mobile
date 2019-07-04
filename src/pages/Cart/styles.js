@@ -124,7 +124,7 @@ export const DeleteButton = styled.TouchableOpacity.attrs({
 
 export const DeleteIcon = styled(Icon).attrs({
   size: 22,
-  color: colors.danger,
+  color: colors.primary,
   name: 'delete-forever',
 })``;
 
@@ -159,7 +159,7 @@ export const ShoppingIcon = styled(Icon).attrs({
 })``;
 
 export const OrderButton = styled.TouchableOpacity`
-  background-color: ${colors.danger};
+  background-color: ${colors.primary};
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
