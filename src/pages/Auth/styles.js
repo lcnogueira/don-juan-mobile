@@ -1,6 +1,9 @@
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 
+import logo from '~/assets/images/logo.png';
+import background from '~/assets/images/background_c.png';
+
 import { metrics, colors } from '~/styles';
 
 export const ContainerAvoidingView = styled.KeyboardAvoidingView`
@@ -9,6 +12,7 @@ export const ContainerAvoidingView = styled.KeyboardAvoidingView`
 
 export const BackgroundWrapper = styled.ImageBackground.attrs({
   resizeMode: 'cover',
+  source: background,
 })`
   flex: 1;
 `;
@@ -28,7 +32,9 @@ export const InnerContainer = styled.View`
   padding: 30px;
 `;
 
-export const Logo = styled.Image`
+export const Logo = styled.Image.attrs({
+  source: logo,
+})`
   width: 72px;
   height: 72px;
   margin-bottom: ${metrics.tripleMargin};

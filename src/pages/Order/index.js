@@ -53,10 +53,10 @@ function Order({ totalAmount, cart, createOrderRequest }) {
     try {
       if (zip) {
         setLoadingSpinner(true);
-        const res = await cep(zip);
         setTimeout(() => {
           setLoadingSpinner(false);
         }, 4000);
+        const res = await cep(zip);
         setStreet(res.street);
         setDistrict(res.neighborhood);
         setLoadingSpinner(false);

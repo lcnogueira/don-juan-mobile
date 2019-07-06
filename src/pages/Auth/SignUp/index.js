@@ -9,9 +9,6 @@ import {
   LinkButton, Input, Button, ButtonText,
 } from '~/styles/components';
 
-import logo from '~/assets/images/logo3x.png';
-import background from '~/assets/images/background.png';
-
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AuthActions from '~/store/ducks/auth';
@@ -32,10 +29,10 @@ function SignUp({ signUpRequest }) {
 
   return (
     <ContainerAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null}>
-      <BackgroundWrapper source={background}>
+      <BackgroundWrapper>
         <Gradient>
           <InnerContainer>
-            <Logo source={logo} />
+            <Logo />
             <Input
               placeholder="Complete name"
               value={name}

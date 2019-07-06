@@ -53,7 +53,7 @@ class Orders extends Component {
             renderItem={({ item: order }) => (
               <OrderItem key={order.id}>
                 <OrderName>{`Order #${order.id}`}</OrderName>
-                <OrderTime>{moment(order.date).fromNow()}</OrderTime>
+                <OrderTime>{order.date}</OrderTime>
                 <OrderPrice>{`$${order.price.toFixed(2)}`}</OrderPrice>
               </OrderItem>
             )}
@@ -69,7 +69,7 @@ const mapStateToProps = ({ orders }) => ({
     ...orders,
     data: orders.data.map(order => ({
       id: order.id,
-      date: order.created_at,
+      date: moment(order.created_at).fromNow(),
       price: order.items.reduce((total, item) => total + (item.quantity * item.typeSize.price), 0.0),
     })),
   },
