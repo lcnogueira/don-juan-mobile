@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Spinner from 'react-native-loading-spinner-overlay';
+import { Alert } from 'react-native';
 
 import MainContainer from '~/components/MainContainer';
 import NavigationService from '~/services/navigation';
@@ -32,6 +33,10 @@ function Order({ totalAmount, cart, createOrderRequest }) {
   let numberInput;
   let districtInput;
 
+  function requiredDataAlert() {
+    Alert.alert('Required data', 'The street, number and district data are required');
+  }
+
   function handleSubmit() {
     const order = {
       note,
@@ -46,7 +51,11 @@ function Order({ totalAmount, cart, createOrderRequest }) {
       })),
     };
 
-    createOrderRequest(order);
+    if (!number || !street || !district) {
+      requiredDataAlert();
+    } else {
+      createOrderRequest(order);
+    }
   }
 
   async function onZipTyped() {

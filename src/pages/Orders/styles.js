@@ -42,7 +42,7 @@ export const OrderItem = styled.View`
 
 export const OrderName = styled.Text`
   font-size: 12px;
-  color: ${colors.secondary};
+  color: ${colors.primary};
   letter-spacing: 0;
   margin-bottom: 5px;
 `;
@@ -57,7 +57,7 @@ export const OrderTime = styled.Text`
 
 export const OrderPrice = styled.Text`
   font-size: 16px;
-  color: ${colors.secondary};
+  color: ${colors.primary};
   letter-spacing: 0;
   margin-bottom: 5px;
   font-weight: bold;
