@@ -5,6 +5,7 @@ import { ProductsTypes } from '~/store/ducks/products';
 import { TypesTypes } from '~/store/ducks/types';
 import { TypeSizesTypes } from '~/store/ducks/typeSizes';
 import { OrdersTypes } from '~/store/ducks/orders';
+import { CartTypes } from '~/store/ducks/cart';
 
 import {
   signIn, signOut, init, signUp, // getPermissions,
@@ -14,7 +15,7 @@ import { loadProducts } from './products';
 import { loadTypes } from './types';
 import { loadTypeSizes } from './typeSizes';
 import { loadOrders, createOrder } from './orders';
-import { emptyCart } from './cart';
+import { updateCart, emptyCart } from './cart';
 
 export default function* rootSaga() {
   yield all([
@@ -32,5 +33,9 @@ export default function* rootSaga() {
 
     takeLatest(OrdersTypes.CREATE_ORDER_REQUEST, createOrder),
     takeLatest(OrdersTypes.CREATE_ORDER_SUCCESS, emptyCart),
+
+    takeLatest(CartTypes.ADD_PRODUCT, updateCart),
+    takeLatest(CartTypes.REMOVE_PRODUCT, updateCart),
+    takeLatest(CartTypes.UPDATE_PRODUCT, updateCart),
   ]);
 }

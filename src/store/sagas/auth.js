@@ -6,12 +6,21 @@ import { AsyncStorage } from 'react-native';
 import NavigationService from '~/services/navigation';
 
 import AuthActions from '../ducks/auth';
+import CartActions from '../ducks/cart';
+
+const KEY = '@Challenge:token';
 
 export function* init() {
-  const token = yield call([AsyncStorage, 'getItem'], '@Omni:token');
+  const token = yield call([AsyncStorage, 'getItem'], KEY);
 
   if (token) {
     yield put(AuthActions.signInSuccess(token));
+  }
+
+  const products = yield call([AsyncStorage, 'getItem'], '@Challenge:products');
+
+  if (products) {
+    yield put(CartActions.addProductsList(JSON.parse(products)));
   }
 
   yield put(AuthActions.initCheckSuccess());
@@ -20,7 +29,7 @@ export function* init() {
 export function* signIn({ email, password }) {
   try {
     const response = yield call(api.post, 'sessions', { email, password });
-    yield call([AsyncStorage, 'setItem'], '@Omni:token', response.data.token);
+    yield call([AsyncStorage, 'setItem'], KEY, response.data.token);
 
     yield put(AuthActions.signInSuccess(response.data.token));
     NavigationService.navigate('Main');
@@ -40,7 +49,7 @@ export function* signUp({ name, email, password }) {
   try {
     const response = yield call(api.post, 'users', { name, email, password });
 
-    yield call([AsyncStorage, 'setItem'], '@Omni:token', response.data.token);
+    yield call([AsyncStorage, 'setItem'], KEY, response.data.token);
 
     yield put(AuthActions.signInSuccess(response.data.token));
     NavigationService.navigate('Main');

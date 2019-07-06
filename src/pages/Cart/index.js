@@ -36,9 +36,10 @@ class Cart extends Component {
     const { removeProduct } = this.props;
 
     Alert.alert('Remove item', 'Are you sure you want to delete this item?', [
-      { text: 'Cancel' },
+      { text: 'No' },
       { text: 'Yes', onPress: () => removeProduct(product) },
-    ]);
+    ],
+    { cancelable: false });
   };
 
   render() {
