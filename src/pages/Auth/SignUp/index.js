@@ -28,9 +28,9 @@ function SignUp({ signUpRequest }) {
   }
 
   return (
-    <ContainerAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null}>
-      <BackgroundWrapper>
-        <Gradient>
+    <BackgroundWrapper>
+      <Gradient>
+        <ContainerAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null}>
           <InnerContainer>
             <Logo />
             <Input
@@ -74,9 +74,9 @@ function SignUp({ signUpRequest }) {
               <ButtonText>Already have an account</ButtonText>
             </LinkButton>
           </InnerContainer>
-        </Gradient>
-      </BackgroundWrapper>
-    </ContainerAvoidingView>
+        </ContainerAvoidingView>
+      </Gradient>
+    </BackgroundWrapper>
   );
 }
 

@@ -33,7 +33,7 @@ export const Input = styled.TextInput.attrs({
 `;
 
 export const Button = styled.TouchableOpacity`
-  background-color: ${colors.primary};
+  background-color: ${colors.secondary};
   border-radius: ${metrics.doubleRadius};
   align-items: center;
   justify-content: center;
@@ -62,7 +62,7 @@ export const Center = styled.View`
 
 export const Loading = styled.ActivityIndicator.attrs(props => ({
   size: props.small ? 'small' : 'large',
-  color: props.light ? colors.white : colors.secondary,
+  color: props.light ? colors.white : colors.primary,
 }))`
   font-weight: bold;
 `;

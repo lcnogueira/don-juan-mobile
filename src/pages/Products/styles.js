@@ -31,7 +31,7 @@ export const RightButton = styled.TouchableOpacity.attrs({
   width: 40px;
   height: 40px;
   border-radius: 20px;
-  background: ${colors.primary};
+  background: ${colors.secondary};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,7 +44,7 @@ export const ShoppingIcon = styled(CommunityIcon).attrs({
 })``;
 
 export const BadgeText = styled.Text`
-    color: ${colors.secondary};
+    color: ${colors.primary};
     font-size: 12px;
     font-weight: bold;
 `;
@@ -96,7 +96,7 @@ export const Info = styled.View`
 
 export const Name = styled.Text`
   font-size: 14px;
-  color: ${colors.secondary};
+  color: ${colors.primary};
   letter-spacing: 0;
   margin-bottom: 5px;
   font-weight: bold;

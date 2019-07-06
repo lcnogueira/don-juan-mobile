@@ -26,9 +26,9 @@ function SignIn({ signInRequest, auth }) {
   }
 
   return (
-    <ContainerAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null}>
-      <BackgroundWrapper>
-        <Gradient>
+    <BackgroundWrapper>
+      <Gradient>
+        <ContainerAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null}>
           <InnerContainer>
             <Logo />
             <Input
@@ -65,9 +65,9 @@ function SignIn({ signInRequest, auth }) {
               <ButtonText>Create free account</ButtonText>
             </LinkButton>
           </InnerContainer>
-        </Gradient>
-      </BackgroundWrapper>
-    </ContainerAvoidingView>
+        </ContainerAvoidingView>
+      </Gradient>
+    </BackgroundWrapper>
   );
 }
 

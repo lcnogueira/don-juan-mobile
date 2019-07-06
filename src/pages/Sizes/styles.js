@@ -50,7 +50,7 @@ export const SizeImage = styled.Image.attrs({
 
 export const Name = styled.Text`
   font-size: 16px;
-  color: ${colors.secondary};
+  color: ${colors.primary};
   letter-spacing: 0;
   font-weight: bold;
   margin-bottom: 6px;
@@ -58,7 +58,7 @@ export const Name = styled.Text`
 
 export const Price = styled.Text`
   font-size: 16px;
-  color: ${colors.secondary};
+  color: ${colors.primary};
   letter-spacing: 0;
   font-weight: bold;
   opacity: 0.6;

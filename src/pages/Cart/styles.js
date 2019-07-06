@@ -69,7 +69,7 @@ export const EmptyMessage = styled.Text`
   text-align: center;
   font-size: 18px;
   font-weight: bold;
-  color: ${colors.secondary};
+  color: ${colors.primary};
 `;
 
 export const Form = styled.View`
@@ -93,7 +93,7 @@ export const AmountInput = styled.TextInput.attrs({
 
 export const Name = styled.Text`
   font-size: 12px;
-  color: ${colors.secondary};
+  color: ${colors.primary};
   letter-spacing: 0;
   margin-bottom: 5px;
 `;
@@ -108,7 +108,7 @@ export const Size = styled.Text`
 
 export const Price = styled.Text`
   font-size: 16px;
-  color: ${colors.secondary};
+  color: ${colors.primary};
   letter-spacing: 0;
   font-weight: bold;
 `;
@@ -124,7 +124,7 @@ export const DeleteButton = styled.TouchableOpacity.attrs({
 
 export const DeleteIcon = styled(Icon).attrs({
   size: 22,
-  color: colors.primary,
+  color: colors.secondary,
   name: 'delete-forever',
 })``;
 
@@ -159,7 +159,7 @@ export const ShoppingIcon = styled(Icon).attrs({
 })``;
 
 export const OrderButton = styled.TouchableOpacity`
-  background-color: ${colors.primary};
+  background-color: ${colors.secondary};
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
