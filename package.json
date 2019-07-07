@@ -1,6 +1,7 @@
 {
-  "name": "modulo4",
+  "name": "mobile-bootcamp-final-challenge",
   "version": "0.0.1",
+  "author": "Luiz Cláudio <luizcns18@gmail.com>",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
