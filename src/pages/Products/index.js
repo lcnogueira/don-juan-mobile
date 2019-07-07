@@ -9,6 +9,7 @@ import {
   LeftButton, HistoryIcon, RightButton, ShoppingIcon, Title, ProductItem, ProductImage, Info, Description, Name, TimeInfo, TimeIcon, Time, BadgeText, BadgeView,
 } from './styles';
 import { Header, List as ProductsList } from '~/styles/components';
+import LogoutButton from '~/components/LogoutButton';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -78,6 +79,7 @@ class Products extends Component {
             }
           />
         </ContentContainer>
+        <LogoutButton />
       </MainContainer>
     );
   }

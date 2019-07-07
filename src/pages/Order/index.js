@@ -33,10 +33,6 @@ function Order({ totalAmount, cart, createOrderRequest }) {
   let numberInput;
   let districtInput;
 
-  function requiredDataAlert() {
-    Alert.alert('Required data', 'The street, number and district data are required');
-  }
-
   function handleSubmit() {
     const order = {
       note,
@@ -52,7 +48,7 @@ function Order({ totalAmount, cart, createOrderRequest }) {
     };
 
     if (!number || !street || !district) {
-      requiredDataAlert();
+      Alert.alert('Required data', 'The street, number and district data are required');
     } else {
       createOrderRequest(order);
     }
@@ -64,7 +60,7 @@ function Order({ totalAmount, cart, createOrderRequest }) {
         setLoadingSpinner(true);
         setTimeout(() => {
           setLoadingSpinner(false);
-        }, 4000);
+        }, 3000);
         const res = await cep(zip);
         setStreet(res.street);
         setDistrict(res.neighborhood);
