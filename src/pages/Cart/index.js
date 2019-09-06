@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Alert } from 'react-native';
 
 import MainContainer from '~/components/MainContainer';
@@ -11,112 +11,83 @@ import {
 } from './styles';
 import { Header, List as CartList } from '~/styles/components';
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import CartActions from '~/store/ducks/cart';
 
-class Cart extends Component {
-  static propTypes = {
-    cart: PropTypes.shape({
-      loading: PropTypes.bool,
-      data: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.number,
-        image: PropTypes.string,
-        name: PropTypes.string,
-        size: PropTypes.string,
-        price: PropTypes.number,
-      })),
-    }).isRequired,
-    totalAmount: PropTypes.number.isRequired,
-    removeProduct: PropTypes.func.isRequired,
-    updateProduct: PropTypes.func.isRequired,
-  }
+export default function Cart() {
+  const cart = useSelector(state => state.cart);
+  const totalAmount = useSelector(state => (state.cart.data.length > 0 ? state.cart.data.reduce((total, product) => total + product.price * product.quantity, 0) : 0));
+  const dispatch = useDispatch();
 
-  confirmDelete = (product) => {
-    const { removeProduct } = this.props;
-
+  function confirmDelete(product) {
     Alert.alert('Remove item', 'Are you sure you want to delete this item?', [
       { text: 'No' },
-      { text: 'Yes', onPress: () => removeProduct(product) },
+      { text: 'Yes', onPress: () => dispatch(CartActions.removeProduct(product)) },
     ],
     { cancelable: false });
-  };
-
-  render() {
-    const { cart, totalAmount, updateProduct } = this.props;
-    return (
-      <MainContainer>
-        <Header>
-          <LeftButton onPress={() => NavigationService.goBack()}>
-            <LeftIcon />
-          </LeftButton>
-          <Title>Cart</Title>
-          <Ammount>{`$${totalAmount.toFixed(2)}`}</Ammount>
-        </Header>
-        <ContentContainer>
-          {cart.data.length > 0
-            ? (
-              <CartList
-                data={cart.data}
-                keyExtractor={product => String(product.id)}
-                showsVerticalScrollIndicator={false}
-                renderItem={({ item: product }) => (
-                  <CartItem key={product.id}>
-                    <ProductImage source={{ uri: product.image }} />
-                    <Info>
-                      <Name>{product.name}</Name>
-                      <Size>{product.size}</Size>
-                      <Price>{`$${product.price.toFixed(2)}`}</Price>
-                    </Info>
-                    <Form>
-                      <AmountInput
-                        autoCorrect={false}
-                        autoCapitalize="none"
-                        defaultValue={String(product.quantity)}
-                        maxLength={2}
-                        keyboardType="numeric"
-                        onChangeText={text => updateProduct(product.id, Number(text))
-                        }
-                      >
-                        {product.amount}
-                      </AmountInput>
-                      <DeleteButton onPress={() => this.confirmDelete(product)}>
-                        <DeleteIcon />
-                      </DeleteButton>
-                    </Form>
-                  </CartItem>
-                )
-                }
-                ListFooterComponent={() => (
-                  <ButtonsContainer>
-                    <ShoppingButton onPress={() => NavigationService.navigate('Products')}>
-                      <ShoppingIcon />
-                    </ShoppingButton>
-                    <OrderButton onPress={() => NavigationService.navigate('Order')}>
-                      <OrderText>PLACE ORDER</OrderText>
-                      <RightIcon />
-                    </OrderButton>
-                  </ButtonsContainer>
-                )}
-              />
-            )
-            : (
-              <MessageContainer>
-                <EmptyMessage>There are no products in the cart.</EmptyMessage>
-              </MessageContainer>
-            )
-          }
-        </ContentContainer>
-      </MainContainer>
-    );
   }
+
+  return (
+    <MainContainer>
+      <Header>
+        <LeftButton onPress={() => NavigationService.goBack()}>
+          <LeftIcon />
+        </LeftButton>
+        <Title>Cart</Title>
+        <Ammount>{`$${totalAmount.toFixed(2)}`}</Ammount>
+      </Header>
+      <ContentContainer>
+        {cart.data.length > 0
+          ? (
+            <CartList
+              data={cart.data}
+              keyExtractor={product => String(product.id)}
+              showsVerticalScrollIndicator={false}
+              renderItem={({ item: product }) => (
+                <CartItem key={product.id}>
+                  <ProductImage source={{ uri: product.image }} />
+                  <Info>
+                    <Name>{product.name}</Name>
+                    <Size>{product.size}</Size>
+                    <Price>{`$${product.price.toFixed(2)}`}</Price>
+                  </Info>
+                  <Form>
+                    <AmountInput
+                      autoCorrect={false}
+                      autoCapitalize="none"
+                      defaultValue={String(product.quantity)}
+                      maxLength={2}
+                      keyboardType="numeric"
+                      onChangeText={text => dispatch(CartActions.updateProduct(product.id, Number(text)))}
+                    >
+                      {product.amount}
+                    </AmountInput>
+                    <DeleteButton onPress={() => confirmDelete(product)}>
+                      <DeleteIcon />
+                    </DeleteButton>
+                  </Form>
+                </CartItem>
+              )
+              }
+              ListFooterComponent={() => (
+                <ButtonsContainer>
+                  <ShoppingButton onPress={() => NavigationService.navigate('Products')}>
+                    <ShoppingIcon />
+                  </ShoppingButton>
+                  <OrderButton onPress={() => NavigationService.navigate('Order')}>
+                    <OrderText>PLACE ORDER</OrderText>
+                    <RightIcon />
+                  </OrderButton>
+                </ButtonsContainer>
+              )}
+            />
+          )
+          : (
+            <MessageContainer>
+              <EmptyMessage>There are no products in the cart.</EmptyMessage>
+            </MessageContainer>
+          )
+        }
+      </ContentContainer>
+    </MainContainer>
+  );
 }
-
-const mapStateToProps = state => ({
-  cart: state.cart,
-  totalAmount: state.cart.data.length > 0 ? state.cart.data.reduce((total, product) => total + product.price * product.quantity, 0) : 0,
-});
-
-const mapDispatchToProps = dispatch => bindActionCreators(CartActions, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);

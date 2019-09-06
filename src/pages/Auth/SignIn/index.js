@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 
 import { Platform } from 'react-native';
 import {
@@ -10,19 +9,20 @@ import {
 } from '~/styles/components';
 
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { useSelector, useDispatch } from 'react-redux';
 import AuthActions from '~/store/ducks/auth';
 
 import NavigationService from '~/services/navigation';
 
-function SignIn({ signInRequest, auth }) {
+export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const auth = useSelector(state => state.auth);
+  const dispatch = useDispatch();
   let passwordInput;
 
   function handleSubmit() {
-    signInRequest(email, password);
+    dispatch(AuthActions.signInRequest(email, password));
   }
 
   return (
@@ -70,18 +70,3 @@ function SignIn({ signInRequest, auth }) {
     </BackgroundWrapper>
   );
 }
-
-SignIn.propTypes = {
-  signInRequest: PropTypes.func.isRequired,
-  auth: PropTypes.shape({
-    loading: PropTypes.bool,
-  }).isRequired,
-};
-
-const mapStateToProps = state => ({
-  auth: state.auth,
-});
-
-const mapDispatchToProps = dispatch => bindActionCreators(AuthActions, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

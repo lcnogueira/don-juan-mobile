@@ -1,10 +1,10 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Center, Loading } from '~/styles/components';
 
 const ContentContainer = ({ children, loading = false }) => (
-  <Fragment>
+  <>
     {loading ? (
       <Center>
         <Loading />
@@ -12,7 +12,7 @@ const ContentContainer = ({ children, loading = false }) => (
     ) : (
       children
     )}
-  </Fragment>
+  </>
 );
 
 ContentContainer.propTypes = {

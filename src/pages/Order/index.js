@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { Alert } from 'react-native';
+import cep from 'cep-promise';
 
 import MainContainer from '~/components/MainContainer';
 import NavigationService from '~/services/navigation';
@@ -10,23 +11,23 @@ import {
   Input, Header,
 } from '~/styles/components';
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import OrdersActions from '~/store/ducks/orders';
-import cep from 'cep-promise';
 
 import {
   LeftButton, LeftIcon, Title, Ammount, ContainerAvoidingView, ButtonsContainer, CompleteButton, CompleteText, RightIcon, NoteInput, InnerView,
 } from './styles';
 
-
-function Order({ totalAmount, cart, createOrderRequest }) {
+export default function Order() {
   const [note, setNote] = useState('');
   const [zip, setZip] = useState('');
   const [street, setStreet] = useState('');
   const [number, setNumber] = useState('');
   const [district, setDistrict] = useState('');
   const [loadingSpinner, setLoadingSpinner] = useState(false);
+
+  const cart = useSelector(state => state.cart);
+  const totalAmount = useSelector(state => (state.cart.data.length > 0 ? state.cart.data.reduce((total, product) => total + product.price * product.quantity, 0) : 0));
+  const dispatch = useDispatch();
 
   let zipInput;
   let streetInput;
@@ -50,7 +51,7 @@ function Order({ totalAmount, cart, createOrderRequest }) {
     if (!number || !street || !district) {
       Alert.alert('Required data', 'The street, number and district data are required');
     } else {
-      createOrderRequest(order);
+      dispatch(OrdersActions.createOrderRequest(order));
     }
   }
 
@@ -154,25 +155,3 @@ function Order({ totalAmount, cart, createOrderRequest }) {
     </MainContainer>
   );
 }
-
-Order.propTypes = {
-  totalAmount: PropTypes.number.isRequired,
-  cart: PropTypes.shape({
-    data: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number,
-        quantity: PropTypes.number,
-      }),
-    ),
-  }).isRequired,
-  createOrderRequest: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = state => ({
-  cart: state.cart,
-  totalAmount: state.cart.data.length > 0 ? state.cart.data.reduce((total, product) => total + product.price * product.quantity, 0) : 0,
-});
-
-const mapDispatchToProps = dispatch => bindActionCreators(OrdersActions, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(Order);

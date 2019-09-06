@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 
 import { Platform } from 'react-native';
 import {
@@ -9,22 +8,22 @@ import {
   LinkButton, Input, Button, ButtonText,
 } from '~/styles/components';
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { useDispatch } from 'react-redux';
 import AuthActions from '~/store/ducks/auth';
 
 import NavigationService from '~/services/navigation';
 
-function SignUp({ signUpRequest }) {
+export default function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const dispatch = useDispatch();
 
   let passwordInput;
   let emailInput;
 
   function handleSubmit() {
-    signUpRequest(name, email, password);
+    dispatch(AuthActions.signUpRequest(name, email, password));
   }
 
   return (
@@ -79,11 +78,3 @@ function SignUp({ signUpRequest }) {
     </BackgroundWrapper>
   );
 }
-
-SignUp.propTypes = {
-  signUpRequest: PropTypes.func.isRequired,
-};
-
-const mapDispatchToProps = dispatch => bindActionCreators(AuthActions, dispatch);
-
-export default connect(null, mapDispatchToProps)(SignUp);

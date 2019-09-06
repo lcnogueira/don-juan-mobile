@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 
 import MainContainer from '~/components/MainContainer';
@@ -11,70 +11,46 @@ import {
 } from './styles';
 import { Header, List as OrdersList } from '~/styles/components';
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import OrdersActions from '~/store/ducks/orders';
 
-class Orders extends Component {
-  static propTypes = {
-    loadOrdersRequest: PropTypes.func.isRequired,
-    orders: PropTypes.shape({
-      loading: PropTypes.bool,
-      data: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.number,
-        date: PropTypes.date,
-        price: PropTypes.number,
-      })),
-    }).isRequired,
-  }
-
-  componentDidMount() {
-    const { loadOrdersRequest } = this.props;
-
-    loadOrdersRequest();
-  }
-
-  render() {
-    const { orders } = this.props;
-
-    return (
-      <MainContainer>
-        <Header>
-          <LeftButton onPress={() => NavigationService.goBack()}>
-            <LeftIcon />
-          </LeftButton>
-          <Title>My Orders</Title>
-        </Header>
-        <ContentContainer loading={orders.loading}>
-          <OrdersList
-            data={orders.data}
-            keyExtractor={order => String(order.id)}
-            showsVerticalScrollIndicator={false}
-            renderItem={({ item: order }) => (
-              <OrderItem key={order.id}>
-                <OrderName>{`Order #${order.id}`}</OrderName>
-                <OrderTime>{order.date}</OrderTime>
-                <OrderPrice>{`$${order.price.toFixed(2)}`}</OrderPrice>
-              </OrderItem>
-            )}
-          />
-        </ContentContainer>
-      </MainContainer>
-    );
-  }
-}
-
-const mapStateToProps = ({ orders }) => ({
-  orders: {
-    ...orders,
-    data: orders.data.map(order => ({
+export default function Orders() {
+  const orders = useSelector(state => ({
+    ...state.orders,
+    data: state.orders.data.map(order => ({
       id: order.id,
       date: moment(order.created_at).fromNow(),
       price: order.items.reduce((total, item) => total + (item.quantity * item.typeSize.price), 0.0),
     })),
-  },
-});
+  }
+  ));
+  const dispatch = useDispatch();
 
-const mapDispatchToProps = dispatch => bindActionCreators(OrdersActions, dispatch);
+  useEffect(() => {
+    dispatch(OrdersActions.loadOrdersRequest());
+  }, [dispatch]);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Orders);
+  return (
+    <MainContainer>
+      <Header>
+        <LeftButton onPress={() => NavigationService.goBack()}>
+          <LeftIcon />
+        </LeftButton>
+        <Title>My Orders</Title>
+      </Header>
+      <ContentContainer loading={orders.loading}>
+        <OrdersList
+          data={orders.data}
+          keyExtractor={order => String(order.id)}
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item: order }) => (
+            <OrderItem key={order.id}>
+              <OrderName>{`Order #${order.id}`}</OrderName>
+              <OrderTime>{order.date}</OrderTime>
+              <OrderPrice>{`$${order.price.toFixed(2)}`}</OrderPrice>
+            </OrderItem>
+          )}
+        />
+      </ContentContainer>
+    </MainContainer>
+  );
+}
